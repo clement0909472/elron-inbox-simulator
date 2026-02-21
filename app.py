@@ -54,7 +54,7 @@ def get_gmail_service():
 
 
 # ---------------------------------------------------------------------------
-# Email generation
+# Email generation  — 1000+ unique combinations
 # ---------------------------------------------------------------------------
 
 TENANTS = [
@@ -73,6 +73,41 @@ TENANTS = [
     ("Daniel White", "d.white.apt12@gmail.com"),
     ("Barbara Harris", "barbara.h.lease@gmail.com"),
     ("Matthew Martin", "matt.martin.tenant@gmail.com"),
+    ("Ashley Robinson", "ashley.robinson.unit@gmail.com"),
+    ("Kevin Lee", "kevin.lee.renter@gmail.com"),
+    ("Stephanie Hall", "s.hall.tenant@gmail.com"),
+    ("Brian Walker", "brian.w.apt@gmail.com"),
+    ("Amanda Allen", "a.allen.lease@gmail.com"),
+    ("Ryan Young", "ryan.young.tenant@gmail.com"),
+    ("Nicole King", "nicole.king.apt@gmail.com"),
+    ("Joshua Wright", "j.wright.renter@gmail.com"),
+    ("Megan Scott", "megan.scott.unit@gmail.com"),
+    ("Tyler Green", "tyler.green.apt@gmail.com"),
+    ("Kayla Adams", "kayla.adams.tenant@gmail.com"),
+    ("Nathan Baker", "n.baker.renter@gmail.com"),
+    ("Brittany Carter", "b.carter.lease@gmail.com"),
+    ("Andrew Mitchell", "andrew.m.tenant@gmail.com"),
+    ("Samantha Perez", "s.perez.apt@gmail.com"),
+    ("Justin Roberts", "justin.r.renter@gmail.com"),
+    ("Lauren Turner", "l.turner.tenant@gmail.com"),
+    ("Brandon Phillips", "b.phillips.apt@gmail.com"),
+    ("Heather Campbell", "h.campbell.lease@gmail.com"),
+    ("Eric Parker", "eric.parker.unit@gmail.com"),
+    ("Amber Evans", "amber.evans.tenant@gmail.com"),
+    ("Jonathan Edwards", "jon.edwards.apt@gmail.com"),
+    ("Rachel Collins", "rachel.c.renter@gmail.com"),
+    ("Aaron Stewart", "aaron.s.tenant@gmail.com"),
+    ("Danielle Sanchez", "d.sanchez.apt@gmail.com"),
+    ("Zachary Morris", "z.morris.renter@gmail.com"),
+    ("Melissa Rogers", "melissa.r.tenant@gmail.com"),
+    ("Patrick Reed", "p.reed.apt@gmail.com"),
+    ("Tiffany Cook", "tiffany.cook.lease@gmail.com"),
+    ("Gregory Morgan", "g.morgan.tenant@gmail.com"),
+    ("Crystal Bell", "crystal.bell.apt@gmail.com"),
+    ("Sean Murphy", "sean.murphy.renter@gmail.com"),
+    ("Vanessa Rivera", "v.rivera.tenant@gmail.com"),
+    ("Derek Cooper", "derek.cooper.apt@gmail.com"),
+    ("Monica Richardson", "m.richardson.lease@gmail.com"),
 ]
 
 CONTRACTORS = [
@@ -81,16 +116,26 @@ CONTRACTORS = [
     ("City Electric Co.", "cityelectric.bids@gmail.com"),
     ("ProFix Contractors", "profix.contractors@gmail.com"),
     ("QuickRepair LLC", "quickrepair.quotes@gmail.com"),
+    ("Metro Roofing Inc.", "metro.roofing.bids@gmail.com"),
+    ("AllPro Maintenance", "allpro.maintenance@gmail.com"),
+    ("Sunrise Pest Control", "sunrise.pest.quotes@gmail.com"),
+    ("Premier Appliance Repair", "premier.appliance.svc@gmail.com"),
+    ("GreenLeaf Landscaping", "greenleaf.quotes@gmail.com"),
+    ("FastFix General Contractors", "fastfix.gc.quotes@gmail.com"),
+    ("BlueSky Windows & Doors", "bluesky.wd.bids@gmail.com"),
 ]
 
 EMAIL_TEMPLATES = [
-    # Leaky faucet
+    # --- Leaky faucet / plumbing ---
     {
         "subject_templates": [
             "Leaking faucet in unit {unit} - urgent",
             "Water dripping from kitchen tap - Unit {unit}",
             "Bathroom faucet won't stop dripping - {unit}",
             "Faucet leak getting worse, need repair ASAP",
+            "Kitchen sink dripping constantly - Unit {unit}",
+            "Plumbing issue in my unit - faucet",
+            "Please fix leaking tap in {unit}",
         ],
         "body_templates": [
             (
@@ -103,16 +148,29 @@ EMAIL_TEMPLATES = [
                 "There's water pooling under the sink cabinet. I've put a bucket down but I really "
                 "need maintenance to look at it.\n\nBest,\n{name}"
             ),
+            (
+                "Hi there,\n\nThe kitchen faucet in my unit ({unit}) has been leaking for {days} days. "
+                "I've tried tightening it myself but it's getting worse. The dripping is also keeping "
+                "me up at night. Can someone come by this week?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nJust a heads up — there's a slow drip under the bathroom sink in Unit {unit}. "
+                "I noticed a small puddle this morning. It doesn't seem urgent yet but I'd rather get "
+                "it looked at before it causes damage.\n\nThanks,\n{name}"
+            ),
         ],
         "sender_pool": "tenants",
     },
-    # Late rent
+    # --- Late rent ---
     {
         "subject_templates": [
             "Rent payment for {month} - delay notice",
             "Late rent - Unit {unit}",
             "Regarding this month's rent",
             "Payment coming {days} days late - heads up",
+            "Late payment notification - {month}",
+            "Heads up: rent will be late this month",
+            "Delayed rent for {month} - Unit {unit}",
         ],
         "body_templates": [
             (
@@ -125,16 +183,34 @@ EMAIL_TEMPLATES = [
                 "I won't be able to pay rent for Unit {unit} until {date}. "
                 "I can pay a portion now if that helps. Please let me know.\n\n{name}"
             ),
+            (
+                "Hi,\n\nI'm writing to let you know my {month} rent will be about {days} days late. "
+                "I had a medical bill come up unexpectedly. I will transfer the full amount by {date} "
+                "and can provide documentation if needed.\n\nSorry for the trouble,\n{name}"
+            ),
+            (
+                "Hello,\n\nI just wanted to give you advance notice that my rent payment for this month "
+                "will be delayed. My employer switched payroll systems and direct deposit is running "
+                "{days} days behind. Full payment will be made by {date}.\n\nThank you for understanding,\n{name}"
+            ),
+            (
+                "Hi,\n\nQuick note — I'll be {days} days late on rent this month for Unit {unit}. "
+                "Lost my part-time job last week and am sorting things out. I will definitely have it "
+                "by {date} and will let you know if anything changes.\n\n{name}"
+            ),
         ],
         "sender_pool": "tenants",
     },
-    # Lease renewal
+    # --- Lease renewal ---
     {
         "subject_templates": [
             "Lease renewal inquiry - Unit {unit}",
             "Renewing my lease - questions",
             "Lease ending {month} - renewal options?",
             "Interested in renewing for another year",
+            "My lease is up in {month} - what are next steps?",
+            "Renewal paperwork for Unit {unit}",
+            "Staying another year - lease renewal request",
         ],
         "body_templates": [
             (
@@ -147,16 +223,35 @@ EMAIL_TEMPLATES = [
                 "I'm very happy here and would like to renew. What's the process? "
                 "Is the rent going up?\n\nBest regards,\n{name}"
             ),
+            (
+                "Hi,\n\nI've been in Unit {unit} for a year now and I'd like to stay. "
+                "My lease ends in {month} — could we discuss renewal terms? "
+                "I'm hoping to lock in a 12-month lease again.\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nWould it be possible to do a month-to-month arrangement after my lease "
+                "in Unit {unit} ends in {month}? I may be relocating for work in {year} and want "
+                "some flexibility. Happy to discuss.\n\n{name}"
+            ),
+            (
+                "Hi,\n\nLease renewal question — I'm in Unit {unit} and my lease ends {month} {year}. "
+                "If I renew for two years instead of one, is there any discount on rent? "
+                "I love the apartment and want to commit long-term.\n\nThanks,\n{name}"
+            ),
         ],
         "sender_pool": "tenants",
     },
-    # Noise complaint
+    # --- Noise complaint ---
     {
         "subject_templates": [
             "Noise complaint - unit above me",
             "Ongoing noise issue - please help",
             "Loud neighbors in Unit {unit} again",
             "Noise disturbance - {time} last night",
+            "Repeated noise problem from upstairs",
+            "Noise complaint for Unit {unit}",
+            "Neighbor disturbance keeping me up",
+            "Can you speak to the tenant in Unit {unit}?",
         ],
         "body_templates": [
             (
@@ -169,16 +264,35 @@ EMAIL_TEMPLATES = [
                 "There's loud music and what sounds like furniture being dragged at all hours. "
                 "I work early mornings and this is affecting my sleep. Please advise.\n\n{name}"
             ),
+            (
+                "Hi,\n\nThis is the third time I'm reaching out about the noise situation. "
+                "The tenant above me (Unit {unit}) had a loud gathering again last night until {time}. "
+                "I have work at 6 AM and this is becoming unbearable. "
+                "Please take action.\n\nThank you,\n{name}"
+            ),
+            (
+                "Hello,\n\nThere was a very loud party in Unit {unit} last night that went until {time}. "
+                "Multiple neighbors were disturbed — I knocked on the door twice but got no response. "
+                "Is there something in the lease about quiet hours?\n\n{name}"
+            ),
+            (
+                "Hi,\n\nI've been patient but the noise from Unit {unit} is really affecting my quality "
+                "of life. It's not just late nights — there's stomping and banging throughout the day too. "
+                "This has been going on for {days} days straight.\n\nPlease help,\n{name}"
+            ),
         ],
         "sender_pool": "tenants",
     },
-    # Contractor quote
+    # --- Contractor quote ---
     {
         "subject_templates": [
             "Quote for {job} - {address}",
             "Estimate for {job} work at {address}",
             "Re: Service request - {job}",
             "{job} repair estimate enclosed",
+            "Proposal for {job} at {address}",
+            "Follow-up: {job} quote",
+            "Revised estimate for {job}",
         ],
         "body_templates": [
             (
@@ -191,36 +305,352 @@ EMAIL_TEMPLATES = [
                 "- Parts & materials: ${materials}\n- Labour ({hours} hrs @ $85/hr): ${labour}\n"
                 "- Total: ${total}\n\nValid for 30 days. Let us know how you'd like to proceed.\n\n{name}\n{company}"
             ),
+            (
+                "Hi,\n\nAttached is our revised estimate for {job} at {address}. We were able to source "
+                "materials at a lower cost than originally quoted.\n\n"
+                "Updated total: ${total} (materials: ${materials}, labour: ${labour})\n\n"
+                "We can mobilize within 3 business days of approval.\n\n{name}\n{company}"
+            ),
+            (
+                "Hello,\n\nThis is a follow-up on our {job} quote for {address}. "
+                "Our estimate of ${total} stands and our schedule has opened up — "
+                "we could have a crew on-site by {date} if you'd like to move forward.\n\n"
+                "Please let us know.\n\n{name}\n{company}"
+            ),
         ],
         "sender_pool": "contractors",
+    },
+    # --- AC / heating not working ---
+    {
+        "subject_templates": [
+            "AC not working in Unit {unit} - it's {temp}°F inside",
+            "Heating broken in my apartment - urgent",
+            "No heat in Unit {unit} since {days} days ago",
+            "HVAC issue - Unit {unit} is overheating",
+            "Air conditioning failed - Unit {unit}",
+            "Thermostat broken in {unit}",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nThe air conditioning in Unit {unit} stopped working {days} days ago. "
+                "The temperature inside is {temp}°F and it's unbearable, especially at night. "
+                "Could you please send maintenance as soon as possible?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nI have no heat in my unit ({unit}). It's been like this for {days} days "
+                "and the temperature is dropping. I have a small child at home and this is a serious issue. "
+                "Please treat this as urgent.\n\nThank you,\n{name}"
+            ),
+            (
+                "Hi,\n\nThe HVAC system in Unit {unit} is blowing warm air regardless of the thermostat setting. "
+                "I've reset the thermostat multiple times. It's {temp}°F inside right now. "
+                "Can you send someone today?\n\n{name}"
+            ),
+            (
+                "Hello,\n\nQuick heads up — the AC in {unit} has been making a loud grinding noise "
+                "for {days} days and now it's stopped cooling entirely. I turned it off to avoid further "
+                "damage. Please advise on when maintenance can come.\n\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Pest infestation ---
+    {
+        "subject_templates": [
+            "Pest problem in Unit {unit} - needs attention",
+            "Cockroach infestation - Unit {unit}",
+            "Mice spotted in my apartment",
+            "Pest control needed urgently - {unit}",
+            "Roach sighting in Unit {unit} - please help",
+            "Rodent issue in building - Unit {unit}",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nI've been seeing cockroaches in my kitchen for the past {days} days (Unit {unit}). "
+                "I've tried store-bought traps but they're not working. I believe the problem may be "
+                "coming through shared walls. Can you schedule pest control?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nI spotted what looks like mouse droppings behind my stove in Unit {unit}. "
+                "I haven't seen any mice yet but I'm very concerned. Could you have pest control "
+                "come and inspect the unit as soon as possible?\n\n{name}"
+            ),
+            (
+                "Hi,\n\nThis is the second time I've raised a pest issue in Unit {unit}. "
+                "Despite the treatment {days} weeks ago, I'm still seeing roaches in the bathroom. "
+                "Whatever was done doesn't seem to have worked. Please arrange a follow-up.\n\n{name}"
+            ),
+            (
+                "Hello,\n\nI found a trail of ants coming in through the kitchen windowsill in Unit {unit}. "
+                "It started small but there are now dozens of them every morning. "
+                "Please send pest control at your earliest convenience.\n\nThanks,\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Water damage / flooding ---
+    {
+        "subject_templates": [
+            "Water leak from upstairs - Unit {unit} flooding",
+            "Ceiling leak in my apartment - urgent",
+            "Water damage in Unit {unit} - needs immediate attention",
+            "Pipe burst - water on the floor in {unit}",
+            "Leaking ceiling - Unit {unit}",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nThere is water leaking through my ceiling in Unit {unit} — it seems to be "
+                "coming from the unit above. There's a large stain and active dripping. "
+                "I've placed towels down but this is getting worse. Please send someone immediately.\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nEmergency — a pipe appears to have burst in my bathroom wall (Unit {unit}). "
+                "Water is pooling on the floor and running into the hallway. "
+                "I've turned off the water main. Please call me at your earliest convenience.\n\n{name}"
+            ),
+            (
+                "Hi,\n\nThere's been a slow ceiling leak in my bedroom (Unit {unit}) for {days} days. "
+                "It started as a small stain but now it's dripping when it rains. "
+                "I'm worried about mold developing. Can you schedule an inspection?\n\n{name}"
+            ),
+            (
+                "Hello,\n\nI came home to find water dripping from the kitchen light fixture in Unit {unit}. "
+                "I've switched off the circuit breaker for safety. This is a potential electrical hazard. "
+                "Please prioritize this.\n\nThank you,\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Broken appliance ---
+    {
+        "subject_templates": [
+            "Dishwasher broken in Unit {unit}",
+            "Oven not working - Unit {unit}",
+            "Washer/dryer issue in my unit",
+            "Refrigerator stopped cooling - Unit {unit}",
+            "Garbage disposal broken - Unit {unit}",
+            "Stove burner not working in {unit}",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nThe dishwasher in Unit {unit} stopped working {days} days ago. "
+                "It fills with water but won't drain. I've tried resetting it but no luck. "
+                "Could maintenance take a look?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nThe refrigerator in my unit ({unit}) isn't keeping things cold. "
+                "I noticed my food spoiling and the freezer isn't freezing either. "
+                "I had to throw out quite a bit of groceries. Can you arrange a repair or replacement?\n\n{name}"
+            ),
+            (
+                "Hi,\n\nTwo of the four burners on my stove aren't working in Unit {unit}. "
+                "The oven still works but the front two burners have no ignition. "
+                "This has been the case for {days} days. Please send someone to fix it.\n\n{name}"
+            ),
+            (
+                "Hello,\n\nThe garbage disposal in Unit {unit} stopped working and is now making a "
+                "humming noise when I flip the switch. I've tried the reset button at the bottom "
+                "but it keeps tripping. Can maintenance come and take a look?\n\nThanks,\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Move-out notice ---
+    {
+        "subject_templates": [
+            "Move-out notice - Unit {unit}",
+            "Notice to vacate - {month}",
+            "Giving {days}-day notice for Unit {unit}",
+            "Ending my tenancy - Unit {unit}",
+            "Vacating Unit {unit} at end of {month}",
+            "30-day notice of move-out",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nI am writing to give formal notice that I will be vacating Unit {unit} "
+                "at the end of {month}. This serves as my {days}-day notice as required by my lease. "
+                "Please let me know what I need to do regarding the move-out inspection and "
+                "security deposit return.\n\nThank you,\n{name}"
+            ),
+            (
+                "Hello,\n\nI wanted to give you advance notice that I'll be moving out of Unit {unit} "
+                "by the end of {month}. I've truly enjoyed living here. "
+                "Could you send me the move-out checklist so I can prepare the apartment properly?\n\nBest,\n{name}"
+            ),
+            (
+                "Hi,\n\nPlease accept this as my official 30-day notice to vacate Unit {unit}. "
+                "My last day will be {date}. I'll be available for the walk-through inspection "
+                "on the final day or a day prior — whatever works best for you.\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nDue to a job relocation, I need to vacate Unit {unit} by {date}. "
+                "I understand my lease runs through {month} and I'd like to discuss early termination "
+                "options and any applicable fees.\n\nPlease let me know how to proceed.\n\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Parking complaint ---
+    {
+        "subject_templates": [
+            "Someone in my parking spot again - Unit {unit}",
+            "Parking issue - unauthorized vehicle",
+            "Unassigned car blocking my spot",
+            "Parking complaint - please help",
+            "Car blocking Unit {unit} parking spot for {days} days",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nFor the {days}th time this month, someone has parked in my assigned spot "
+                "(Unit {unit}). I had to park on the street last night. Could you please send a notice "
+                "to all residents or arrange for the vehicle to be towed?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nThere's an unfamiliar car that has been parked in my spot for {days} days. "
+                "It has no visible permit. I've left a note on the windshield twice but it's still there. "
+                "Can you help resolve this?\n\n{name}"
+            ),
+            (
+                "Hi,\n\nI wanted to flag a parking issue. A vehicle has been double-parked in the lot "
+                "blocking several spots including mine (Unit {unit}). This has been happening repeatedly "
+                "in the evenings. Could you check if it belongs to a resident?\n\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Mold / air quality ---
+    {
+        "subject_templates": [
+            "Mold growing in Unit {unit} bathroom",
+            "Mold concern - please inspect",
+            "Black mold spotted in {unit}",
+            "Ventilation and mold issue - Unit {unit}",
+            "Air quality concern in my apartment",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nI've noticed black mold growing along the grout lines in my bathroom (Unit {unit}). "
+                "The bathroom fan doesn't seem to be working properly which may be the cause. "
+                "I'm concerned about health implications. Can you send someone to inspect?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nThere's a musty smell coming from the closet in my bedroom (Unit {unit}). "
+                "I moved some boxes and noticed what looks like mold on the wall behind them. "
+                "Please have maintenance take a look before it spreads.\n\n{name}"
+            ),
+            (
+                "Hi,\n\nI've been having respiratory issues for the past {days} days and I think "
+                "it might be related to mold in my unit ({unit}). The bathroom walls are damp and "
+                "there are dark spots forming. Can we get an inspection scheduled?\n\nThank you,\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- Security / access issue ---
+    {
+        "subject_templates": [
+            "Front door lock broken - Unit {unit}",
+            "Security concern - building entrance not locking",
+            "Lost key fob - Unit {unit}",
+            "Mailbox lock broken",
+            "Building security issue - please address",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nThe deadbolt on my front door (Unit {unit}) isn't latching properly. "
+                "I can lock it with the key but it doesn't catch when I just close the door. "
+                "This is a security concern. Can maintenance fix or replace the lock?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nI noticed the main entrance door to the building has not been locking "
+                "properly for {days} days. It can be pushed open without a key fob. "
+                "This is a safety issue for all residents. Please have it fixed urgently.\n\n{name}"
+            ),
+            (
+                "Hi,\n\nI've lost my key fob for building access and need a replacement for Unit {unit}. "
+                "Could you let me know the process and whether there's a replacement fee? "
+                "In the meantime, can someone let me in this evening?\n\n{name}"
+            ),
+            (
+                "Hello,\n\nMy mailbox lock in the lobby is broken — I haven't been able to access "
+                "my mail for {days} days. Can you arrange a repair or provide a temporary solution?\n\nThanks,\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
+    },
+    # --- General maintenance request ---
+    {
+        "subject_templates": [
+            "Maintenance request - Unit {unit}",
+            "Several small repairs needed in {unit}",
+            "Maintenance checklist - Unit {unit}",
+            "Repair request for Unit {unit}",
+            "Items needing attention in my unit",
+        ],
+        "body_templates": [
+            (
+                "Hi,\n\nI have a few small items in Unit {unit} that need attention:\n\n"
+                "1. The bathroom door doesn't close all the way\n"
+                "2. One of the kitchen cabinet hinges is loose\n"
+                "3. The window screen in the bedroom has a tear\n\n"
+                "None are urgent but I wanted to log them. When's a good time for maintenance "
+                "to swing by?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nCould I schedule a maintenance visit for Unit {unit}? "
+                "The toilet has been running intermittently, and the bathroom exhaust fan "
+                "is very loud. I'm free most weekday mornings if that works.\n\n{name}"
+            ),
+            (
+                "Hi,\n\nQuick maintenance request for Unit {unit}: the kitchen faucet handle "
+                "is loose and wobbles when used, and one of the bedroom light fixtures flickers. "
+                "Can someone come take a look this week?\n\nThanks,\n{name}"
+            ),
+            (
+                "Hello,\n\nI wanted to submit a maintenance request. The caulking around the bathtub "
+                "in Unit {unit} is peeling and there are small gaps forming. I'm worried about water "
+                "seeping into the wall. Can you have someone re-caulk it?\n\nThanks,\n{name}"
+            ),
+        ],
+        "sender_pool": "tenants",
     },
 ]
 
 MONTHS = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
-JOBS = ["roof repair", "HVAC servicing", "plumbing inspection",
-        "electrical panel upgrade", "drywall repair", "window replacement",
-        "parking lot resurfacing", "boiler maintenance"]
-ADDRESSES = ["12 Oak Street", "45 Maple Ave", "78 Pine Rd", "231 Elm Blvd", "9 Cedar Lane"]
-TIMES = ["midnight", "1:00 AM", "2:30 AM", "11:45 PM", "12:30 AM"]
+JOBS = [
+    "roof repair", "HVAC servicing", "plumbing inspection",
+    "electrical panel upgrade", "drywall repair", "window replacement",
+    "parking lot resurfacing", "boiler maintenance", "gutter cleaning",
+    "exterior painting", "concrete crack repair", "fire alarm testing",
+    "elevator inspection", "landscaping overhaul", "waterproofing",
+    "deck repair", "insulation upgrade", "sump pump installation",
+]
+ADDRESSES = [
+    "12 Oak Street", "45 Maple Ave", "78 Pine Rd", "231 Elm Blvd", "9 Cedar Lane",
+    "103 Birch Court", "55 Walnut Drive", "18 Spruce Way", "400 Willow Terrace", "7 Ash Place",
+]
+TIMES = ["midnight", "1:00 AM", "2:30 AM", "11:45 PM", "12:30 AM", "1:45 AM", "11:00 PM", "2:00 AM"]
+TEMPS = [84, 87, 89, 91, 93, 95, 52, 49, 46, 43]
 
 
 def _random_date(month_name: str) -> str:
-    day = random.randint(15, 28)
+    day = random.randint(10, 28)
     return f"{month_name} {day}, 2026"
 
 
 def generate_email(index: int) -> dict:
     template = random.choice(EMAIL_TEMPLATES)
     month = random.choice(MONTHS)
-    unit = f"{random.randint(1, 8)}{random.choice(['A', 'B', 'C', 'D'])}"
-    days = random.randint(2, 14)
-    hours = random.randint(3, 12)
-    materials = random.randint(80, 800)
+    unit = f"{random.randint(1, 12)}{random.choice(['A', 'B', 'C', 'D', 'E'])}"
+    days = random.randint(2, 21)
+    hours = random.randint(3, 14)
+    materials = random.randint(80, 1200)
     labour = hours * 85
     total = materials + labour
     job = random.choice(JOBS)
     address = random.choice(ADDRESSES)
+    temp = random.choice(TEMPS)
 
     if template["sender_pool"] == "contractors":
         company, sender_email = random.choice(CONTRACTORS)
@@ -236,11 +666,11 @@ def generate_email(index: int) -> dict:
     else:
         name, sender_email = random.choice(TENANTS)
         subject = random.choice(template["subject_templates"]).format(
-            unit=unit, month=month, days=days, time=random.choice(TIMES)
+            unit=unit, month=month, days=days, time=random.choice(TIMES), temp=temp
         )
         body = random.choice(template["body_templates"]).format(
             unit=unit, month=month, name=name.split()[0], days=days,
-            date=_random_date(month), time=random.choice(TIMES), year=2026
+            date=_random_date(month), time=random.choice(TIMES), year=2026, temp=temp
         )
 
     return {"from_name": name, "from_email": sender_email, "subject": subject, "body": body}
