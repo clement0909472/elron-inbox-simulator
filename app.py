@@ -50,7 +50,7 @@ def get_gmail_service():
             with open(TOKEN_FILE, "w") as token:
                 token.write(creds.to_json())
 
-    return build("gmail", "v1", credentials=creds)
+    return build("gmail", "v1", credentials=creds, cache_discovery=False)
 
 
 # ---------------------------------------------------------------------------
