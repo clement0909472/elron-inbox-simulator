@@ -1,63 +1,124 @@
 import base64
-import email.mime.text
 import json
 import os
 import random
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from flask import Flask, jsonify, render_template_string
+from flask import Flask, jsonify, redirect, render_template_string, request, session
 
+from google.auth.exceptions import RefreshError
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(32))
 
 SCOPES = ["https://mail.google.com/"]
 CREDENTIALS_FILE = "credentials.json"
-TOKEN_FILE = "token.json"
-TARGET_EMAIL = "relaylegacy@gmail.com"
 
 # ---------------------------------------------------------------------------
-# Gmail auth
+# OAuth helpers — web flow, tokens stored in browser session (signed cookie)
+# Works with any Gmail account; no manual token management ever needed.
 # ---------------------------------------------------------------------------
+
+def _client_config() -> dict:
+    creds_env = os.environ.get("GOOGLE_CREDENTIALS")
+    if creds_env:
+        return json.loads(creds_env)
+    with open(CREDENTIALS_FILE) as f:
+        return json.load(f)
+
+
+def _redirect_uri() -> str:
+    configured = os.environ.get("GOOGLE_REDIRECT_URI")
+    if configured:
+        return configured
+    # Auto-detect for local dev
+    return request.host_url.rstrip("/") + "/oauth2callback"
+
 
 def get_gmail_service():
-    creds = None
+    """Return an authenticated Gmail service using the session token.
+    Raises PermissionError("NOT_AUTHENTICATED") if the user isn't signed in.
+    """
+    token_data = session.get("google_token")
+    if not token_data:
+        raise PermissionError("NOT_AUTHENTICATED")
 
-    # Production (Vercel): load from environment variables
-    token_env = os.environ.get("GOOGLE_TOKEN")
-    creds_env = os.environ.get("GOOGLE_CREDENTIALS")
+    creds = Credentials.from_authorized_user_info(token_data, SCOPES)
 
-    if token_env:
-        creds = Credentials.from_authorized_user_info(json.loads(token_env), SCOPES)
-    elif os.path.exists(TOKEN_FILE):
-        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
-
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        elif creds_env:
-            # On Vercel with no valid token — token env var needs updating
-            raise Exception("Token missing or expired. Re-run auth locally and update the GOOGLE_TOKEN env var on Vercel.")
+    if not creds.valid:
+        if creds.expired and creds.refresh_token:
+            try:
+                creds.refresh(Request())
+                # Persist refreshed token back into session so it stays current
+                session["google_token"] = json.loads(creds.to_json())
+            except RefreshError:
+                session.pop("google_token", None)
+                session.pop("user_email", None)
+                raise PermissionError("NOT_AUTHENTICATED")
         else:
-            # Local dev: open browser flow
-            flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
-            creds = flow.run_local_server(port=0)
-            with open(TOKEN_FILE, "w") as token:
-                token.write(creds.to_json())
+            session.pop("google_token", None)
+            session.pop("user_email", None)
+            raise PermissionError("NOT_AUTHENTICATED")
 
     return build("gmail", "v1", credentials=creds, cache_discovery=False)
+
+
+# ---------------------------------------------------------------------------
+# Auth routes
+# ---------------------------------------------------------------------------
+
+@app.route("/auth")
+def auth():
+    flow = Flow.from_client_config(
+        _client_config(), scopes=SCOPES, redirect_uri=_redirect_uri()
+    )
+    auth_url, state = flow.authorization_url(
+        access_type="offline",
+        prompt="consent",          # always get a fresh refresh token
+        include_granted_scopes="true",
+    )
+    session["oauth_state"] = state
+    return redirect(auth_url)
+
+
+@app.route("/oauth2callback")
+def oauth2callback():
+    flow = Flow.from_client_config(
+        _client_config(),
+        scopes=SCOPES,
+        redirect_uri=_redirect_uri(),
+        state=session.get("oauth_state"),
+    )
+    flow.fetch_token(authorization_response=request.url)
+    creds = flow.credentials
+    session["google_token"] = json.loads(creds.to_json())
+    session.pop("oauth_state", None)
+    # Cache the user's email address for display
+    try:
+        svc = build("gmail", "v1", credentials=creds, cache_discovery=False)
+        profile = svc.users().getProfile(userId="me").execute()
+        session["user_email"] = profile.get("emailAddress", "")
+    except Exception:
+        pass
+    return redirect("/")
+
+
+@app.route("/signout")
+def signout():
+    session.clear()
+    return redirect("/")
 
 
 # ---------------------------------------------------------------------------
 # Properties & tenant roster — 20 properties, 50 tenants
 # ---------------------------------------------------------------------------
 
-# 10 single-unit properties
 SINGLE_UNIT_PROPERTIES = [
     "14 Birchwood Lane",
     "88 Sunset Drive",
@@ -71,7 +132,6 @@ SINGLE_UNIT_PROPERTIES = [
     "8 Whispering Pines Road",
 ]
 
-# 10 multi-unit buildings: address → [unit codes]
 MULTI_UNIT_PROPERTIES = {
     "45 Maple Avenue":    ["1A", "2B", "3C", "4D"],
     "78 Pine Road":       ["101", "202", "303", "404"],
@@ -87,7 +147,6 @@ MULTI_UNIT_PROPERTIES = {
 
 ALL_ADDRESSES = SINGLE_UNIT_PROPERTIES + list(MULTI_UNIT_PROPERTIES.keys())
 
-# Full tenant roster: (full_name, email, address, unit_or_None)
 TENANT_ROSTER = [
     # --- Single-unit properties ---
     ("James Smith",        "james.smith.tenant@gmail.com",    "14 Birchwood Lane",        None),
@@ -150,63 +209,6 @@ TENANT_ROSTER = [
     ("Vanessa Rivera",     "v.rivera.tenant@gmail.com",       "92 Hawthorn Gardens",       "201"),
     ("Derek Cooper",       "derek.cooper.apt@gmail.com",      "92 Hawthorn Gardens",       "301"),
     ("Monica Richardson",  "m.richardson.lease@gmail.com",    "92 Hawthorn Gardens",       "401"),
-]
-
-# ---------------------------------------------------------------------------
-# Email generation
-# ---------------------------------------------------------------------------
-
-TENANTS = [  # used by cleanup_my_inbox.py to identify injected emails
-    ("James Smith", "james.smith.tenant@gmail.com"),
-    ("Maria Garcia", "maria.garcia.apt4b@gmail.com"),
-    ("David Chen", "david.chen.renter@gmail.com"),
-    ("Sarah Johnson", "sarah.j.tenant@gmail.com"),
-    ("Michael Brown", "mbrown.tenant@gmail.com"),
-    ("Emily Davis", "emily.davis.lease@gmail.com"),
-    ("Robert Wilson", "rwilson.apt@gmail.com"),
-    ("Jessica Martinez", "jessica.m.renter@gmail.com"),
-    ("William Anderson", "william.a.tenant@gmail.com"),
-    ("Linda Taylor", "linda.taylor.apt@gmail.com"),
-    ("Christopher Thomas", "c.thomas.renter@gmail.com"),
-    ("Patricia Jackson", "p.jackson.tenant@gmail.com"),
-    ("Daniel White", "d.white.apt12@gmail.com"),
-    ("Barbara Harris", "barbara.h.lease@gmail.com"),
-    ("Matthew Martin", "matt.martin.tenant@gmail.com"),
-    ("Ashley Robinson", "ashley.robinson.unit@gmail.com"),
-    ("Kevin Lee", "kevin.lee.renter@gmail.com"),
-    ("Stephanie Hall", "s.hall.tenant@gmail.com"),
-    ("Brian Walker", "brian.w.apt@gmail.com"),
-    ("Amanda Allen", "a.allen.lease@gmail.com"),
-    ("Ryan Young", "ryan.young.tenant@gmail.com"),
-    ("Nicole King", "nicole.king.apt@gmail.com"),
-    ("Joshua Wright", "j.wright.renter@gmail.com"),
-    ("Megan Scott", "megan.scott.unit@gmail.com"),
-    ("Tyler Green", "tyler.green.apt@gmail.com"),
-    ("Kayla Adams", "kayla.adams.tenant@gmail.com"),
-    ("Nathan Baker", "n.baker.renter@gmail.com"),
-    ("Brittany Carter", "b.carter.lease@gmail.com"),
-    ("Andrew Mitchell", "andrew.m.tenant@gmail.com"),
-    ("Samantha Perez", "s.perez.apt@gmail.com"),
-    ("Justin Roberts", "justin.r.renter@gmail.com"),
-    ("Lauren Turner", "l.turner.tenant@gmail.com"),
-    ("Brandon Phillips", "b.phillips.apt@gmail.com"),
-    ("Heather Campbell", "h.campbell.lease@gmail.com"),
-    ("Eric Parker", "eric.parker.unit@gmail.com"),
-    ("Amber Evans", "amber.evans.tenant@gmail.com"),
-    ("Jonathan Edwards", "jon.edwards.apt@gmail.com"),
-    ("Rachel Collins", "rachel.c.renter@gmail.com"),
-    ("Aaron Stewart", "aaron.s.tenant@gmail.com"),
-    ("Danielle Sanchez", "d.sanchez.apt@gmail.com"),
-    ("Zachary Morris", "z.morris.renter@gmail.com"),
-    ("Melissa Rogers", "melissa.r.tenant@gmail.com"),
-    ("Patrick Reed", "p.reed.apt@gmail.com"),
-    ("Tiffany Cook", "tiffany.cook.lease@gmail.com"),
-    ("Gregory Morgan", "g.morgan.tenant@gmail.com"),
-    ("Crystal Bell", "crystal.bell.apt@gmail.com"),
-    ("Sean Murphy", "sean.murphy.renter@gmail.com"),
-    ("Vanessa Rivera", "v.rivera.tenant@gmail.com"),
-    ("Derek Cooper", "derek.cooper.apt@gmail.com"),
-    ("Monica Richardson", "m.richardson.lease@gmail.com"),
 ]
 
 CONTRACTORS = [
@@ -422,7 +424,7 @@ EMAIL_TEMPLATES = [
     # --- AC / heating not working ---
     {
         "subject_templates": [
-            "AC not working in {unit} - it's {temp}°F inside",
+            "AC not working in {unit} - it's {temp}F inside",
             "Heating broken in my apartment - urgent",
             "No heat in {unit} since {days} days ago",
             "HVAC issue - {unit} is overheating",
@@ -432,7 +434,7 @@ EMAIL_TEMPLATES = [
         "body_templates": [
             (
                 "Hi,\n\nThe air conditioning in {unit} stopped working {days} days ago. "
-                "The temperature inside is {temp}°F and it's unbearable, especially at night. "
+                "The temperature inside is {temp}F and it's unbearable, especially at night. "
                 "Could you please send maintenance as soon as possible?\n\nThanks,\n{name}"
             ),
             (
@@ -442,7 +444,7 @@ EMAIL_TEMPLATES = [
             ),
             (
                 "Hi,\n\nThe HVAC system in {unit} is blowing warm air regardless of the thermostat setting. "
-                "I've reset the thermostat multiple times. It's {temp}°F inside right now. "
+                "I've reset the thermostat multiple times. It's {temp}F inside right now. "
                 "Can you send someone today?\n\n{name}"
             ),
             (
@@ -893,10 +895,10 @@ def generate_email(index: int) -> dict:
     return {"from_name": from_name, "from_email": sender_email, "subject": subject, "body": body}
 
 
-def build_raw_message(from_name: str, from_email: str, subject: str, body: str) -> str:
+def build_raw_message(from_name: str, from_email: str, subject: str, body: str, to_email: str) -> str:
     msg = MIMEMultipart("alternative")
     msg["From"] = f"{from_name} <{from_email}>"
-    msg["To"] = TARGET_EMAIL
+    msg["To"] = to_email
     msg["Subject"] = subject
     msg.attach(MIMEText(body, "plain"))
     raw = base64.urlsafe_b64encode(msg.as_bytes()).decode("utf-8")
@@ -909,20 +911,30 @@ def build_raw_message(from_name: str, from_email: str, subject: str, body: str) 
 
 @app.route("/")
 def index():
-    return render_template_string(HTML_DASHBOARD)
+    user_email = session.get("user_email", "")
+    authenticated = bool(session.get("google_token"))
+    return render_template_string(HTML_DASHBOARD, authenticated=authenticated, user_email=user_email)
 
 
 @app.route("/inject", methods=["POST"])
 def inject_emails():
     try:
         service = get_gmail_service()
+    except PermissionError:
+        return jsonify({"success": False, "auth_required": True}), 401
+
+    try:
+        # Get the signed-in user's email for the To: header
+        user_email = session.get("user_email") or "me"
+
         injected = 0
         errors = []
 
         for i in range(50):
             data = generate_email(i)
             raw = build_raw_message(
-                data["from_name"], data["from_email"], data["subject"], data["body"]
+                data["from_name"], data["from_email"], data["subject"], data["body"],
+                to_email=user_email,
             )
             try:
                 service.users().messages().insert(
@@ -947,9 +959,11 @@ def inject_emails():
 def reset_inbox():
     try:
         service = get_gmail_service()
-        deleted = 0
+    except PermissionError:
+        return jsonify({"success": False, "auth_required": True}), 401
 
-        # Page through all inbox messages and batch-delete
+    try:
+        deleted = 0
         page_token = None
         message_ids = []
 
@@ -967,7 +981,6 @@ def reset_inbox():
         if not message_ids:
             return jsonify({"success": True, "deleted": 0, "message": "Inbox already empty."})
 
-        # batchDelete accepts up to 1000 IDs at a time
         chunk_size = 1000
         for i in range(0, len(message_ids), chunk_size):
             chunk = message_ids[i : i + chunk_size]
@@ -1036,6 +1049,23 @@ HTML_DASHBOARD = """
       font-size: 0.95rem;
     }
 
+    .auth-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .auth-bar .email { color: #a0a0c0; }
+    .auth-bar a {
+      color: #60a5fa;
+      text-decoration: none;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid #2a4a6a;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .auth-bar a:hover { background: #1a2a3a; }
+
     .card-grid {
       display: flex;
       gap: 1.5rem;
@@ -1061,7 +1091,8 @@ HTML_DASHBOARD = """
     .card-title { font-size: 1rem; font-weight: 600; text-align: center; }
     .card-desc { font-size: 0.82rem; color: #8888aa; text-align: center; line-height: 1.5; }
 
-    button {
+    button, .btn-google {
+      display: block;
       margin-top: 0.5rem;
       width: 100%;
       padding: 0.75rem 1.5rem;
@@ -1070,9 +1101,11 @@ HTML_DASHBOARD = """
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
+      text-align: center;
+      text-decoration: none;
       transition: opacity 0.2s, transform 0.1s;
     }
-    button:active { transform: scale(0.97); }
+    button:active, .btn-google:active { transform: scale(0.97); }
     button:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .btn-inject {
@@ -1083,6 +1116,31 @@ HTML_DASHBOARD = """
       background: linear-gradient(135deg, #dc2626, #b45309);
       color: #fff;
     }
+    .btn-google {
+      background: #fff;
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .btn-google:hover { opacity: 0.9; }
+
+    .login-card {
+      background: #1a1a24;
+      border: 1px solid #2a2a3a;
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .login-card .lock { font-size: 3rem; }
+    .login-card h2 { font-size: 1.1rem; font-weight: 600; }
+    .login-card p { font-size: 0.82rem; color: #8888aa; line-height: 1.6; }
 
     #status {
       max-width: 480px;
@@ -1113,18 +1171,24 @@ HTML_DASHBOARD = """
 <body>
 
   <div class="logo">Elron AI &mdash; Demo Tools</div>
-
   <h1>Inbox Simulator</h1>
-  <p class="subtitle">Populate or reset the Gmail inbox for <strong>relaylegacy@gmail.com</strong></p>
+
+  {% if authenticated %}
+
+  <div class="auth-bar">
+    <span class="email">{{ user_email }}</span>
+    <a href="/signout">Sign out</a>
+  </div>
+
+  <p class="subtitle">Populate or reset <strong>{{ user_email }}</strong>'s Gmail inbox</p>
 
   <div class="card-grid">
-
     <div class="card">
-      <div class="card-icon">📬</div>
+      <div class="card-icon">&#128236;</div>
       <div class="card-title">Inject 50 Morning Emails</div>
       <div class="card-desc">
-        Floods the inbox with realistic property management emails — maintenance requests,
-        late rent, lease renewals, noise complaints & contractor quotes.
+        Floods the inbox with realistic property management emails &mdash; maintenance requests,
+        late rent, lease renewals, noise complaints &amp; contractor quotes.
       </div>
       <button class="btn-inject" onclick="runAction('/inject', this)">
         Inject 50 Emails
@@ -1132,7 +1196,7 @@ HTML_DASHBOARD = """
     </div>
 
     <div class="card">
-      <div class="card-icon">🗑️</div>
+      <div class="card-icon">&#128465;&#65039;</div>
       <div class="card-title">Reset / Clear Inbox</div>
       <div class="card-desc">
         Permanently deletes every message currently in the inbox, restoring a
@@ -1142,7 +1206,6 @@ HTML_DASHBOARD = """
         Clear Inbox
       </button>
     </div>
-
   </div>
 
   <div id="status"></div>
@@ -1155,26 +1218,55 @@ HTML_DASHBOARD = """
       allBtns.forEach(b => b.disabled = true);
       status.className = 'info';
       status.style.display = 'block';
-      status.innerHTML = '<span class="spinner"></span> Working… this may take a few seconds.';
+      status.innerHTML = '<span class="spinner"></span> Working\u2026 this may take a few seconds.';
 
       try {
         const res = await fetch(url, { method: 'POST' });
         const data = await res.json();
+        if (data.auth_required) {
+          window.location.href = '/auth';
+          return;
+        }
         if (data.success) {
           status.className = 'ok';
-          status.textContent = '✓ ' + data.message;
+          status.textContent = data.message;
         } else {
           status.className = 'error';
-          status.textContent = '✗ ' + data.message;
+          status.textContent = data.message;
         }
       } catch (err) {
         status.className = 'error';
-        status.textContent = '✗ Network error: ' + err.message;
+        status.textContent = 'Network error: ' + err.message;
       } finally {
         allBtns.forEach(b => b.disabled = false);
       }
     }
   </script>
+
+  {% else %}
+
+  <p class="subtitle">Sign in with any Gmail account to get started</p>
+
+  <div class="login-card">
+    <div class="lock">&#128274;</div>
+    <h2>Connect your Gmail</h2>
+    <p>
+      The simulator will inject realistic property management emails directly
+      into whichever Gmail inbox you sign in with. No password is stored &mdash;
+      only a short-lived session token.
+    </p>
+    <a href="/auth" class="btn-google">
+      <svg width="18" height="18" viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.2l6.7-6.7C35.6 2.4 30.1 0 24 0 14.8 0 6.9 5.4 3 13.3l7.8 6C12.8 13 18 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4 6.9-10 6.9-17z" />
+        <path fill="#FBBC05" d="M10.8 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.8-6A23.9 23.9 0 0 0 0 24c0 3.9.9 7.6 2.5 10.8l8.3-6.1z"/>
+        <path fill="#34A853" d="M24 48c6.1 0 11.2-2 14.9-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.4 2.2-6 0-11.1-4-12.9-9.4l-8.3 6.1C6.9 42.6 14.8 48 24 48z"/>
+      </svg>
+      Sign in with Google
+    </a>
+  </div>
+
+  {% endif %}
 
 </body>
 </html>

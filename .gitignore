@@ -1,0 +1,9 @@
+.vercel
+credentials.json
+token.json
+cleanup_token.json
+*.pptx
+*.jpg
+*.png
+__pycache__/
+.env
