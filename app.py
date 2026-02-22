@@ -248,6 +248,7 @@ def inject_batch(batch):
                 service.users().messages().insert(
                     userId="me",
                     body={"labelIds": ["INBOX", "UNREAD"], "raw": raw},
+                    internalDateSource="dateHeader",
                 ).execute()
                 injected += 1
             except HttpError as e:
