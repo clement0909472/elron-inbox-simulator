@@ -1,9 +1,13 @@
 .vercel
 credentials.json
+client_secret_*.json
 token.json
 cleanup_token.json
 *.pptx
 *.jpg
 *.png
+*.xlsx
 __pycache__/
 .env
+.claude/
+cleanup_my_inbox.py
