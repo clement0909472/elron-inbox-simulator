@@ -67,8 +67,10 @@ STORYLINES.append({
 })
 
 # === 2. ELEVATOR v2 — breaks again (day1-day4) ===
+# Each tenant emails INDEPENDENTLY about the same issue (no cross-tenant threading).
+# The AI should recognize these are about the same problem and group them.
 STORYLINES.append({
-    "id": "elevator_v2",
+    "id": "elevator_v2_sean",
     "thread_subject": "Elevator broken AGAIN - 92 Hawthorn Gardens",
     "emails": [
         {
@@ -79,76 +81,105 @@ STORYLINES.append({
             "body": "Hi,\n\nI'm sorry to report that the elevator at 92 Hawthorn Gardens is out of service again as of this morning. The doors open but the cab won't move. I tried pressing all the buttons but nothing happens.\n\nI know it was just fixed a few weeks ago so this is frustrating. Could you contact the elevator company again?\n\nThanks,\nSean Murphy\nUnit 101",
             "is_reply": False,
         },
+    ],
+})
+
+STORYLINES.append({
+    "id": "elevator_v2_vanessa",
+    "thread_subject": "Elevator not working - 92 Hawthorn Gardens",
+    "emails": [
         {
             "batch": "day1",
             "from_name": "Vanessa Rivera",
             "from_email": "v.rivera.tenant@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
-            "body": "Hi,\n\nI'm writing to confirm the elevator is definitely not working. I tried it around 8 AM and it's completely dead. I'm on the 2nd floor so stairs are manageable for me, but I'm worried about Mrs. Richardson on the 4th floor \u2014 she has mobility issues.\n\nPlease let us know when it will be fixed.\n\nThank you,\nVanessa Rivera\nUnit 201",
+            "subject": "Elevator not working - 92 Hawthorn Gardens",
+            "body": "Hi,\n\nI'm writing to let you know the elevator is not working. I tried it around 8 AM and it's completely dead. I'm on the 2nd floor so stairs are manageable for me, but I'm worried about Mrs. Richardson on the 4th floor \u2014 she has mobility issues.\n\nPlease let us know when it will be fixed.\n\nThank you,\nVanessa Rivera\nUnit 201",
+            "is_reply": False,
+        },
+        {
+            "batch": "day4",
+            "from_name": "Vanessa Rivera",
+            "from_email": "v.rivera.tenant@gmail.com",
+            "subject": "Re: Elevator not working - 92 Hawthorn Gardens",
+            "body": "Hi,\n\nJust wanted to say thank you for getting the elevator fixed. It's running great now. I know these things take time and I appreciate you handling it.\n\nBest,\nVanessa\nUnit 201",
             "is_reply": True,
         },
+    ],
+})
+
+STORYLINES.append({
+    "id": "elevator_v2_derek",
+    "thread_subject": "ELEVATOR BROKEN - 92 Hawthorn Gardens - UNACCEPTABLE",
+    "emails": [
         {
             "batch": "day1",
             "from_name": "Derek Cooper",
             "from_email": "derek.cooper.apt@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
+            "subject": "ELEVATOR BROKEN - 92 Hawthorn Gardens - UNACCEPTABLE",
             "body": "Are you KIDDING me?? The elevator is broken AGAIN?? I literally just complained about the state of this building and now this happens. I'm on the 3rd floor and I have a bad knee. This is completely unacceptable.\n\nI want to know EXACTLY what's being done about this and when it will be fixed. If this isn't resolved by end of day I'm calling the housing authority. I'm also seriously considering withholding next month's rent until this building is properly maintained.\n\nThis is a joke.\n\nDerek Cooper\nUnit 301",
-            "is_reply": True,
-        },
-        {
-            "batch": "day1",
-            "from_name": "Monica Richardson",
-            "from_email": "m.richardson.lease@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
-            "body": "Dear Property Manager,\n\nI hope this message finds you well. I'm writing because the elevator appears to be out of order again. As you may know, I'm 72 years old and live on the 4th floor. Climbing the stairs is very difficult for me, especially with groceries.\n\nMy daughter helped me get upstairs today but she can't be here every day. Could you please prioritize getting this fixed? I would be very grateful.\n\nThank you so much,\nMonica Richardson\nUnit 401",
-            "is_reply": True,
-        },
-        {
-            "batch": "day2",
-            "from_name": "Summit Elevator Services",
-            "from_email": "summit.elevator.svc@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
-            "body": "Hi,\n\nThank you for contacting us about the elevator at 92 Hawthorn Gardens. We're sorry to hear it's having issues again.\n\nOur earliest available technician can be on-site tomorrow morning between 8-10 AM. Based on your description (doors open, cab won't move), it sounds like it could be a motor relay or control board issue \u2014 different from the guide shoe we replaced last time.\n\nWe'll diagnose the problem and provide a quote before proceeding with any repairs.\n\nBest regards,\nMike Torres\nSummit Elevator Services\n(555) 234-8901",
-            "is_reply": True,
+            "is_reply": False,
         },
         {
             "batch": "day2",
             "from_name": "Derek Cooper",
             "from_email": "derek.cooper.apt@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
+            "subject": "Re: ELEVATOR BROKEN - 92 Hawthorn Gardens - UNACCEPTABLE",
             "body": "TOMORROW?? Are you serious right now? The elevator has been broken since yesterday morning and the earliest anyone can come is TOMORROW?\n\nI had to carry my groceries up 3 flights of stairs. My knee is killing me. Meanwhile I'm paying $2,400 a month for an apartment with a broken elevator. What exactly am I paying for?\n\nThis is the second time in a month. Maybe it's time to find a competent elevator company. Or maybe I need to find a competent property manager.\n\nI expect a rent reduction for this inconvenience.\n\nDerek Cooper\nUnit 301",
             "is_reply": True,
         },
         {
             "batch": "day3",
-            "from_name": "Summit Elevator Services",
-            "from_email": "summit.elevator.svc@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
-            "body": "Hi,\n\nOur technician completed the repair at 92 Hawthorn Gardens this morning. Here's the summary:\n\nDIAGNOSIS: The main drive motor contactor was failing intermittently, causing the cab to lose power after the doors opened. Additionally, we found a worn cable sheave bearing that was contributing to the grinding noise reported previously.\n\nWORK PERFORMED:\n- Replaced main motor contactor\n- Replaced cable sheave bearing\n- Tested all safety interlocks\n- Lubricated all moving components\n- Full operational test (50 cycles, all floors)\n\nInvoice #SE-4867\nLabour (4.5 hrs @ $125/hr): $562.50\nParts (motor contactor): $340.00\nParts (sheave bearing): $215.00\nService call fee: $50.00\nTotal: $1,167.50\n\nThe elevator is now fully operational. We recommend a full annual inspection within the next 3 months given the age of this unit.\n\nPayment due within 30 days.\n\nBest regards,\nMike Torres\nSummit Elevator Services",
-            "is_reply": True,
-        },
-        {
-            "batch": "day3",
             "from_name": "Derek Cooper",
             "from_email": "derek.cooper.apt@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
+            "subject": "Re: ELEVATOR BROKEN - 92 Hawthorn Gardens - UNACCEPTABLE",
             "body": "So it took 3 days to fix an elevator. Three days. And apparently the problem was something that should have been caught during the LAST repair. Great job everyone.\n\nI still expect a rent adjustment for the inconvenience. My knee is still swollen from hauling myself up and down the stairs.\n\nDerek Cooper\nUnit 301",
             "is_reply": True,
         },
         {
             "batch": "day4",
-            "from_name": "Vanessa Rivera",
-            "from_email": "v.rivera.tenant@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
-            "body": "Hi,\n\nJust wanted to say thank you for getting the elevator fixed. It's running great now. I know these things take time and I appreciate you handling it.\n\nBest,\nVanessa\nUnit 201",
-            "is_reply": True,
-        },
-        {
-            "batch": "day4",
             "from_name": "Derek Cooper",
             "from_email": "derek.cooper.apt@gmail.com",
-            "subject": "Re: Elevator broken AGAIN - 92 Hawthorn Gardens",
+            "subject": "Re: ELEVATOR BROKEN - 92 Hawthorn Gardens - UNACCEPTABLE",
             "body": "Finally. Only took half the week.\n\nI'm still waiting to hear about the rent adjustment.\n\nDerek Cooper\nUnit 301",
+            "is_reply": True,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "elevator_v2_monica",
+    "thread_subject": "Elevator out of order - 92 Hawthorn Gardens",
+    "emails": [
+        {
+            "batch": "day1",
+            "from_name": "Monica Richardson",
+            "from_email": "m.richardson.lease@gmail.com",
+            "subject": "Elevator out of order - 92 Hawthorn Gardens",
+            "body": "Dear Property Manager,\n\nI hope this message finds you well. I'm writing because the elevator appears to be out of order again. As you may know, I'm 72 years old and live on the 4th floor. Climbing the stairs is very difficult for me, especially with groceries.\n\nMy daughter helped me get upstairs today but she can't be here every day. Could you please prioritize getting this fixed? I would be very grateful.\n\nThank you so much,\nMonica Richardson\nUnit 401",
+            "is_reply": False,
+        },
+    ],
+})
+
+# Contractor thread for the elevator repair (only threads with PM, not tenants)
+STORYLINES.append({
+    "id": "elevator_v2_contractor",
+    "thread_subject": "Elevator repair request - 92 Hawthorn Gardens",
+    "emails": [
+        {
+            "batch": "day2",
+            "from_name": "Summit Elevator Services",
+            "from_email": "summit.elevator.svc@gmail.com",
+            "subject": "Elevator repair request - 92 Hawthorn Gardens",
+            "body": "Hi,\n\nThank you for contacting us about the elevator at 92 Hawthorn Gardens. We're sorry to hear it's having issues again.\n\nOur earliest available technician can be on-site tomorrow morning between 8-10 AM. Based on your description (doors open, cab won't move), it sounds like it could be a motor relay or control board issue \u2014 different from the guide shoe we replaced last time.\n\nWe'll diagnose the problem and provide a quote before proceeding with any repairs.\n\nBest regards,\nMike Torres\nSummit Elevator Services\n(555) 234-8901",
+            "is_reply": False,
+        },
+        {
+            "batch": "day3",
+            "from_name": "Summit Elevator Services",
+            "from_email": "summit.elevator.svc@gmail.com",
+            "subject": "Re: Elevator repair request - 92 Hawthorn Gardens",
+            "body": "Hi,\n\nOur technician completed the repair at 92 Hawthorn Gardens this morning. Here's the summary:\n\nDIAGNOSIS: The main drive motor contactor was failing intermittently, causing the cab to lose power after the doors opened. Additionally, we found a worn cable sheave bearing that was contributing to the grinding noise reported previously.\n\nWORK PERFORMED:\n- Replaced main motor contactor\n- Replaced cable sheave bearing\n- Tested all safety interlocks\n- Lubricated all moving components\n- Full operational test (50 cycles, all floors)\n\nInvoice #SE-4867\nLabour (4.5 hrs @ $125/hr): $562.50\nParts (motor contactor): $340.00\nParts (sheave bearing): $215.00\nService call fee: $50.00\nTotal: $1,167.50\n\nThe elevator is now fully operational. We recommend a full annual inspection within the next 3 months given the age of this unit.\n\nPayment due within 30 days.\n\nBest regards,\nMike Torres\nSummit Elevator Services",
             "is_reply": True,
         },
     ],
@@ -387,8 +418,9 @@ STORYLINES.append({
 })
 
 # === 8. NOISE COMPLAINT — 55 Walnut Drive ===
+# Lauren complains, Brandon responds separately (no cross-tenant thread)
 STORYLINES.append({
-    "id": "noise_walnut",
+    "id": "noise_walnut_lauren",
     "thread_subject": "Noise complaint - Unit 2A, 55 Walnut Drive",
     "emails": [
         {
@@ -408,20 +440,27 @@ STORYLINES.append({
             "is_reply": True,
         },
         {
-            "batch": "day2",
-            "from_name": "Brandon Phillips",
-            "from_email": "b.phillips.apt@gmail.com",
-            "subject": "Re: Noise complaint - Unit 2A, 55 Walnut Drive",
-            "body": "Hi,\n\nI got your message about the noise complaint. I want to apologize \u2014 my brother was visiting from out of town and things got louder than I intended. It was a one-time thing and it won't happen again.\n\nI'll be more mindful of the volume going forward, especially after 10 PM.\n\nSorry for the trouble.\n\nBrandon Phillips\nUnit 2A",
-            "is_reply": True,
-        },
-        {
             "batch": "day4",
             "from_name": "Lauren Turner",
             "from_email": "l.turner.tenant@gmail.com",
             "subject": "Re: Noise complaint - Unit 2A, 55 Walnut Drive",
             "body": "Hi,\n\nJust wanted to let you know it's been quiet the past few nights. Whatever you said to the tenant in 2A seems to have worked. Thank you for handling it.\n\nLauren\nUnit 1B",
             "is_reply": True,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "noise_walnut_brandon",
+    "thread_subject": "About the noise complaint - Unit 2A, 55 Walnut Drive",
+    "emails": [
+        {
+            "batch": "day2",
+            "from_name": "Brandon Phillips",
+            "from_email": "b.phillips.apt@gmail.com",
+            "subject": "About the noise complaint - Unit 2A, 55 Walnut Drive",
+            "body": "Hi,\n\nI got your message about the noise complaint. I want to apologize \u2014 my brother was visiting from out of town and things got louder than I intended. It was a one-time thing and it won't happen again.\n\nI'll be more mindful of the volume going forward, especially after 10 PM.\n\nSorry for the trouble.\n\nBrandon Phillips\nUnit 2A",
+            "is_reply": False,
         },
     ],
 })
@@ -507,8 +546,9 @@ STORYLINES.append({
 })
 
 # === 11. PARKING DISPUTE — 7 Ash Place ===
+# Patrick complains, Tiffany emails separately to apologize (no cross-tenant thread)
 STORYLINES.append({
-    "id": "parking_ash",
+    "id": "parking_ash_patrick",
     "thread_subject": "Someone in my parking spot - 7 Ash Place",
     "emails": [
         {
@@ -527,13 +567,20 @@ STORYLINES.append({
             "body": "Hi,\n\nIt happened again. Same silver Honda in my spot. This is the second time this week. I left a note on the windshield last time but clearly that didn't work.\n\nCan you please send a notice to all residents? If it happens again I'd like to have the car towed.\n\nPatrick\nUnit A1",
             "is_reply": True,
         },
+    ],
+})
+
+STORYLINES.append({
+    "id": "parking_ash_tiffany",
+    "thread_subject": "Sorry about the parking situation - 7 Ash Place",
+    "emails": [
         {
             "batch": "day2",
             "from_name": "Tiffany Cook",
             "from_email": "tiffany.cook.lease@gmail.com",
-            "subject": "Re: Someone in my parking spot - 7 Ash Place",
-            "body": "Hi,\n\nI'm so sorry \u2014 the silver Honda is my sister's car. She's been visiting me this week and I didn't realize she was parking in the wrong spot. I thought A1 was a visitor space.\n\nI've told her to park on the street from now on. It won't happen again. Please apologize to Patrick for me.\n\nTiffany Cook\nUnit A2",
-            "is_reply": True,
+            "subject": "Sorry about the parking situation - 7 Ash Place",
+            "body": "Hi,\n\nI think I owe you an apology. The silver Honda that's been in spot A1 is my sister's car. She's been visiting me this week and I didn't realize she was parking in the wrong spot. I thought A1 was a visitor space.\n\nI've told her to park on the street from now on. It won't happen again. Please apologize to the tenant in A1 for me.\n\nTiffany Cook\nUnit A2",
+            "is_reply": False,
         },
     ],
 })
@@ -579,8 +626,9 @@ STORYLINES.append({
 })
 
 # === 13. SECURITY / LOCK — 12 Oak Street ===
+# Two tenants report the same lock issue independently (cluster scenario)
 STORYLINES.append({
-    "id": "lock_oak",
+    "id": "lock_oak_joshua",
     "thread_subject": "Building entrance lock broken - 12 Oak Street",
     "emails": [
         {
@@ -591,21 +639,35 @@ STORYLINES.append({
             "body": "Hi,\n\nThe electronic lock on the main entrance at 12 Oak Street isn't working properly. My key fob doesn't register about half the time and I've seen the door propped open with a rock, which is a security concern.\n\nCould you have someone look at it?\n\nThanks,\nJoshua Wright\nUnit 2A",
             "is_reply": False,
         },
+    ],
+})
+
+STORYLINES.append({
+    "id": "lock_oak_megan",
+    "thread_subject": "Front door lock not working - 12 Oak Street",
+    "emails": [
         {
             "batch": "day1",
             "from_name": "Megan Scott",
             "from_email": "megan.scott.unit@gmail.com",
-            "subject": "Re: Building entrance lock broken - 12 Oak Street",
-            "body": "Hi,\n\nI wanted to add to Joshua's report \u2014 the front door lock is definitely getting worse. This morning it wouldn't read anyone's fob at all. Several of us were stuck outside until someone opened it from inside.\n\nThis is a safety issue, especially at night.\n\nMegan Scott\nUnit 2B",
-            "is_reply": True,
+            "subject": "Front door lock not working - 12 Oak Street",
+            "body": "Hi,\n\nThe front door lock at 12 Oak Street is getting worse. This morning it wouldn't read anyone's fob at all. Several of us were stuck outside until someone opened it from inside.\n\nThis is a safety issue, especially at night.\n\nMegan Scott\nUnit 2B",
+            "is_reply": False,
         },
+    ],
+})
+
+STORYLINES.append({
+    "id": "lock_oak_contractor",
+    "thread_subject": "Lock repair request - 12 Oak Street",
+    "emails": [
         {
             "batch": "day2",
             "from_name": "SafeGuard Locksmith",
             "from_email": "safeguard.locksmith@gmail.com",
-            "subject": "Re: Building entrance lock broken - 12 Oak Street",
+            "subject": "Lock repair request - 12 Oak Street",
             "body": "Hi,\n\nWe can send a technician to 12 Oak Street tomorrow morning to diagnose the electronic lock issue. If it's the reader unit, we carry common replacements on our truck and can likely fix it same-day.\n\nService call: $75.00 (applied to repair if we proceed)\n\nPlease confirm.\n\nSafeGuard Locksmith\n(555) 789-0123",
-            "is_reply": True,
+            "is_reply": False,
         },
         {
             "batch": "day3",
@@ -613,7 +675,7 @@ STORYLINES.append({
             "from_email": "safeguard.locksmith@gmail.com",
             "subject": "Invoice - Lock repair, 12 Oak Street",
             "body": "Hi,\n\nWe've completed the lock repair at 12 Oak Street. The RFID reader module had failed. We replaced it and reprogrammed all existing fobs. Everything is working properly.\n\nInvoice #SGL-0334\nRFID reader module: $220.00\nLabour (2 hrs @ $90/hr): $180.00\nFob reprogramming (12 fobs): $60.00\nTotal: $460.00\n\nPayment due within 30 days.\n\nSafeGuard Locksmith",
-            "is_reply": False,
+            "is_reply": True,
         },
     ],
 })
@@ -986,6 +1048,166 @@ STORYLINES.append({
             "from_email": "truseal.waterproof@gmail.com",
             "subject": "Basement waterproofing inspection - 78 Pine Road",
             "body": "Hi,\n\nFollowing our inspection of the basement at 78 Pine Road, we found minor seepage along the east wall foundation joint. Currently not severe but could worsen with heavy rain.\n\nWe recommend interior waterproofing membrane application on the affected wall section.\n\nQuote #TW-0567: $2,400.00\n\nThis includes a 5-year warranty against water intrusion.\n\nLet us know if you'd like to proceed.\n\nTruSeal Waterproofing",
+            "is_reply": False,
+        },
+    ],
+})
+
+
+# ===================================================================
+# CLUSTER SCENARIOS — multiple tenants independently report same issue
+# The AI should recognize these are about the same problem and group them.
+# ===================================================================
+
+# --- DAY 2 CLUSTER: Garage door broken at 103 Birch Court ---
+STORYLINES.append({
+    "id": "garage_door_nathan",
+    "thread_subject": "Garage door won't open - 103 Birch Court",
+    "emails": [
+        {
+            "batch": "day2",
+            "from_name": "Nathan Baker",
+            "from_email": "n.baker.renter@gmail.com",
+            "subject": "Garage door won't open - 103 Birch Court",
+            "body": "Hi,\n\nThe garage door at 103 Birch Court is stuck and won't open. I pressed my remote several times but nothing happens. I can hear the motor trying to engage but the door doesn't move. I'm stuck and can't get my car out.\n\nCould you please send someone to look at it ASAP?\n\nThanks,\nNathan Baker\nUnit 201",
+            "is_reply": False,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "garage_door_brittany",
+    "thread_subject": "Can't get into the garage - 103 Birch Court",
+    "emails": [
+        {
+            "batch": "day2",
+            "from_name": "Brittany Carter",
+            "from_email": "b.carter.lease@gmail.com",
+            "subject": "Can't get into the garage - 103 Birch Court",
+            "body": "Hi,\n\nI just got home from work and the garage door at 103 Birch Court won't open. My remote isn't working and neither is the keypad. I had to park on the street.\n\nIs anyone else having this problem? Please let me know when it will be fixed.\n\nThanks,\nBrittany Carter\nUnit 202",
+            "is_reply": False,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "garage_door_andrew",
+    "thread_subject": "Garage door issue - 103 Birch Court",
+    "emails": [
+        {
+            "batch": "day2",
+            "from_name": "Andrew Mitchell",
+            "from_email": "andrew.m.tenant@gmail.com",
+            "subject": "Garage door issue - 103 Birch Court",
+            "body": "Hi,\n\nJust wanted to report that the garage door at 103 Birch Court seems to be broken. The motor makes a grinding noise but the door won't budge. I noticed Nathan from 201 was also trying to get it open this morning.\n\nPlease arrange a repair.\n\nThanks,\nAndrew Mitchell\nUnit 301",
+            "is_reply": False,
+        },
+    ],
+})
+
+# --- DAY 3 CLUSTER: Hot water outage at 400 Willow Terrace ---
+STORYLINES.append({
+    "id": "hotwater_aaron",
+    "thread_subject": "No hot water - Unit 4, 400 Willow Terrace",
+    "emails": [
+        {
+            "batch": "day3",
+            "from_name": "Aaron Stewart",
+            "from_email": "aaron.s.tenant@gmail.com",
+            "subject": "No hot water - Unit 4, 400 Willow Terrace",
+            "body": "Hi,\n\nThere's no hot water in my unit this morning. The cold water works fine but the hot tap runs completely cold. Is this a building-wide issue or just my unit?\n\nThanks,\nAaron Stewart\nUnit 4",
+            "is_reply": False,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "hotwater_danielle",
+    "thread_subject": "Hot water not working - 400 Willow Terrace",
+    "emails": [
+        {
+            "batch": "day3",
+            "from_name": "Danielle Sanchez",
+            "from_email": "d.sanchez.apt@gmail.com",
+            "subject": "Hot water not working - 400 Willow Terrace",
+            "body": "Hi,\n\nI don't have any hot water in Unit 5 at 400 Willow Terrace. I tried waiting 10 minutes but it stays ice cold. I need to shower before work so this is pretty urgent.\n\nPlease let me know what's going on.\n\nDanielle Sanchez\nUnit 5",
+            "is_reply": False,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "hotwater_melissa",
+    "thread_subject": "Cold water only - Unit 7, 400 Willow Terrace",
+    "emails": [
+        {
+            "batch": "day3",
+            "from_name": "Melissa Rogers",
+            "from_email": "melissa.r.tenant@gmail.com",
+            "subject": "Cold water only - Unit 7, 400 Willow Terrace",
+            "body": "Hi,\n\nIs the hot water boiler broken? I have no hot water in Unit 7. I spoke to my neighbor Zachary and he said he doesn't have hot water either. Seems like it might be the whole building.\n\nCould you please look into this?\n\nThanks,\nMelissa Rogers\nUnit 7",
+            "is_reply": False,
+        },
+    ],
+})
+
+# --- DAY 4 CLUSTER: Hallway lights out at 18 Spruce Way ---
+STORYLINES.append({
+    "id": "lights_eric",
+    "thread_subject": "Hallway lights out - 18 Spruce Way",
+    "emails": [
+        {
+            "batch": "day4",
+            "from_name": "Eric Parker",
+            "from_email": "eric.parker.unit@gmail.com",
+            "subject": "Hallway lights out - 18 Spruce Way",
+            "body": "Hi,\n\nAll the hallway lights on the 1st floor of 18 Spruce Way are out. It's completely dark when you come in the front entrance. I nearly tripped on the stairs this evening.\n\nCould you have someone check the breaker or replace the bulbs?\n\nThanks,\nEric Parker\nUnit 101",
+            "is_reply": False,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "lights_amber",
+    "thread_subject": "Dark hallways - 18 Spruce Way",
+    "emails": [
+        {
+            "batch": "day4",
+            "from_name": "Amber Evans",
+            "from_email": "amber.evans.tenant@gmail.com",
+            "subject": "Dark hallways - 18 Spruce Way",
+            "body": "Hi,\n\nThe hallway lights are out on both the 1st and 2nd floors at 18 Spruce Way. It's been dark since I got home around 6 PM. I don't feel safe walking to my unit in the dark, especially at night.\n\nPlease fix this as soon as possible.\n\nAmber Evans\nUnit 102",
+            "is_reply": False,
+        },
+    ],
+})
+
+# --- MONTH 1 CLUSTER: Heating issues at 78 Pine Road ---
+STORYLINES.append({
+    "id": "heating_matt",
+    "thread_subject": "Heater not working - Unit 101, 78 Pine Road",
+    "emails": [
+        {
+            "batch": "month1",
+            "from_name": "Matthew Martin",
+            "from_email": "matt.martin.tenant@gmail.com",
+            "subject": "Heater not working - Unit 101, 78 Pine Road",
+            "body": "Hi,\n\nThe heater in my unit (101) at 78 Pine Road isn't producing any heat. The thermostat is set to 72 but the apartment is freezing. I can see my breath inside.\n\nCould you please send someone? It's supposed to get down to 25\u00b0F tonight.\n\nThanks,\nMatt Martin\nUnit 101",
+            "is_reply": False,
+        },
+    ],
+})
+
+STORYLINES.append({
+    "id": "heating_stephanie",
+    "thread_subject": "No heat in my apartment - 78 Pine Road",
+    "emails": [
+        {
+            "batch": "month1",
+            "from_name": "Stephanie Hall",
+            "from_email": "s.hall.tenant@gmail.com",
+            "subject": "No heat in my apartment - 78 Pine Road",
+            "body": "Hi,\n\nI have no heat in Unit 404 at 78 Pine Road. The radiator is completely cold. I've been using a space heater but I'm worried about the pipes freezing if this isn't fixed soon.\n\nIs this affecting other units too?\n\nStephanie Hall\nUnit 404",
             "is_reply": False,
         },
     ],
