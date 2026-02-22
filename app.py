@@ -140,22 +140,13 @@ def signout():
 
 
 # ---------------------------------------------------------------------------
-# Threading helpers
+# Email building & threading helpers
 # ---------------------------------------------------------------------------
 
-_thread_ids: dict[str, str] = {}
-
-
-def _make_message_id(storyline_id: str, email_subject: str, idx: int) -> str:
-    seed = f"{storyline_id}:{email_subject}:{idx}"
-    h = hashlib.md5(seed.encode()).hexdigest()[:16]
-    return f"<{h}@elron-sim.local>"
-
-
 def build_raw_message(from_name: str, from_email: str, subject: str,
-                      body: str, to_email: str, thread_subject: str = None,
-                      is_reply: bool = False, storyline_id: str = None,
-                      email_idx: int = 0, fake_date: datetime = None) -> str:
+                      body: str, to_email: str,
+                      fake_date: datetime = None) -> str:
+    """Build a base64url-encoded RFC 2822 message."""
     msg = MIMEMultipart("alternative")
     msg["From"] = f"{from_name} <{from_email}>"
     msg["To"] = to_email
@@ -164,22 +155,29 @@ def build_raw_message(from_name: str, from_email: str, subject: str,
         msg["Date"] = formatdate(timeval=fake_date.timestamp(), localtime=False, usegmt=True)
     else:
         msg["Date"] = formatdate(localtime=True)
-
-    msg_id = _make_message_id(storyline_id or "", subject, email_idx)
-    msg["Message-ID"] = msg_id
-
-    if thread_subject and is_reply:
-        parent_id = _thread_ids.get(thread_subject)
-        if parent_id:
-            msg["In-Reply-To"] = parent_id
-            msg["References"] = parent_id
-
-    if thread_subject and not is_reply:
-        _thread_ids[thread_subject] = msg_id
-
     msg.attach(MIMEText(body, "plain"))
     raw = base64.urlsafe_b64encode(msg.as_bytes()).decode("utf-8")
     return raw
+
+
+def _find_thread_id(service, thread_subject: str) -> str | None:
+    """Search Gmail for an existing thread by subject. Returns threadId or None."""
+    try:
+        # Strip Re:/Fwd: prefixes to find the root subject
+        clean = thread_subject
+        for prefix in ["Re: ", "RE: ", "Fwd: ", "FWD: "]:
+            if clean.startswith(prefix):
+                clean = clean[len(prefix):]
+        query = f'subject:"{clean}"'
+        result = service.users().messages().list(
+            userId="me", q=query, maxResults=1
+        ).execute()
+        messages = result.get("messages", [])
+        if messages:
+            return messages[0].get("threadId")
+    except Exception:
+        pass
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -215,6 +213,9 @@ def inject_batch(batch):
         day_offset = BATCH_DAY_OFFSETS.get(batch, 0)
         rng = random.Random(f"elron-ts-{batch}")
 
+        # Cache: thread_subject -> Gmail threadId (for this request)
+        thread_cache: dict[str, str] = {}
+
         for i, email_data in enumerate(emails):
             # Build a realistic fake timestamp
             if day_offset is None:
@@ -224,12 +225,10 @@ def inject_batch(batch):
             else:
                 # Fixed-day batches: same day, spread across business hours
                 base = now + timedelta(days=day_offset)
-                # Spread emails across 7:00-18:00, with small random jitter
                 hour_offset = 7.0 + (11.0 * i / max(len(emails) - 1, 1))
                 minute_jitter = rng.randint(-15, 15)
                 fake_dt = base.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(hours=hour_offset, minutes=minute_jitter)
 
-            # Add per-email second jitter so no two emails share exact same time
             fake_dt = fake_dt + timedelta(seconds=rng.randint(0, 59))
 
             raw = build_raw_message(
@@ -238,19 +237,38 @@ def inject_batch(batch):
                 subject=email_data["subject"],
                 body=email_data["body"],
                 to_email=user_email,
-                thread_subject=email_data.get("thread_subject"),
-                is_reply=email_data.get("is_reply", False),
-                storyline_id=email_data.get("storyline_id", ""),
-                email_idx=i,
                 fake_date=fake_dt,
             )
+
+            # Threading: determine if this email should join an existing thread
+            thread_subject = email_data.get("thread_subject")
+            is_reply = email_data.get("is_reply", False)
+            insert_body = {"labelIds": ["INBOX", "UNREAD"], "raw": raw}
+
+            if thread_subject and is_reply:
+                # Look up threadId: first in our local cache, then search Gmail
+                tid = thread_cache.get(thread_subject)
+                if not tid:
+                    tid = _find_thread_id(service, thread_subject)
+                    if tid:
+                        thread_cache[thread_subject] = tid
+                if tid:
+                    insert_body["threadId"] = tid
+
             try:
-                service.users().messages().insert(
+                result = service.users().messages().insert(
                     userId="me",
-                    body={"labelIds": ["INBOX", "UNREAD"], "raw": raw},
+                    body=insert_body,
                     internalDateSource="dateHeader",
                 ).execute()
                 injected += 1
+
+                # Cache the threadId for future replies in this batch
+                if thread_subject and not is_reply:
+                    thread_cache[thread_subject] = result.get("threadId", "")
+                elif thread_subject and "threadId" not in thread_cache:
+                    thread_cache[thread_subject] = result.get("threadId", "")
+
             except HttpError as e:
                 errors.append(str(e))
 
