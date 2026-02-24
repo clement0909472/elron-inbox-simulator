@@ -1,6 +1,6 @@
 """
 Pre-authored, interconnected email storylines for the Elron Inbox Simulator.
-Batches: history, day1, day2, day3, day4, month1, month2
+Batches: history, day1, day2, day3, day4, day_fr, month1, month2
 """
 
 # ---------------------------------------------------------------------------
@@ -1246,6 +1246,12 @@ ROUTINE_EMAILS = {
         {"from_name": "Justin Roberts", "from_email": "justin.r.renter@gmail.com", "subject": "Rent payment - Unit 1A, 55 Walnut Drive", "body": "Hi,\n\nRent transferred. Please confirm.\n\nJustin Roberts\nUnit 1A"},
         {"from_name": "Eric Parker", "from_email": "eric.parker.unit@gmail.com", "subject": "Hallway carpet stain - 18 Spruce Way", "body": "Hi,\n\nThere's a large coffee stain on the hallway carpet on the 1st floor of 18 Spruce Way. It's been there for a few days. Could the cleaning crew address it?\n\nThanks,\nEric Parker\nUnit 101"},
     ],
+    "day_fr": [
+        {"from_name": "Zachary Morris", "from_email": "z.morris.renter@gmail.com", "subject": "Paiement du loyer - Unité 6, 400 Willow Terrace", "body": "Bonjour,\n\nLe loyer a été envoyé ce matin par virement.\n\nZach\nUnit 6"},
+        {"from_name": "Brittany Carter", "from_email": "b.carter.lease@gmail.com", "subject": "Question sur la politique des invités - Unité 202, 103 Birch Court", "body": "Bonjour,\n\nMon ami reste chez moi quelques semaines pendant les travaux dans son appartement. Dois-je vous prévenir ou l'ajouter temporairement au bail ?\n\nMerci,\nBrittany\nUnit 202"},
+        {"from_name": "Justin Roberts", "from_email": "justin.r.renter@gmail.com", "subject": "Paiement du loyer - Unité 1A, 55 Walnut Drive", "body": "Bonjour,\n\nLoyer viré. Merci de confirmer réception.\n\nJustin Roberts\nUnit 1A"},
+        {"from_name": "Eric Parker", "from_email": "eric.parker.unit@gmail.com", "subject": "Tache sur le tapis du couloir - 18 Spruce Way", "body": "Bonjour,\n\nIl y a une grosse tache de café sur le tapis du couloir au 1er étage du 18 Spruce Way. Ça fait plusieurs jours. L'équipe d'entretien pourrait s'en occuper ?\n\nMerci,\nEric Parker\nUnit 101"},
+    ],
     "day2": [
         {"from_name": "Vanessa Rivera", "from_email": "v.rivera.tenant@gmail.com", "subject": "Rent payment - Unit 201, 92 Hawthorn Gardens", "body": "Hi,\n\nRent has been transferred for this month.\n\nVanessa Rivera\nUnit 201"},
         {"from_name": "Sean Murphy", "from_email": "sean.murphy.renter@gmail.com", "subject": "Laundry room hours question - 92 Hawthorn Gardens", "body": "Hi,\n\nQuick question \u2014 what are the official laundry room hours? I've been doing laundry late at night and want to make sure I'm not breaking any rules.\n\nThanks,\nSean\nUnit 101"},
@@ -1287,6 +1293,9 @@ SPAM_EMAILS = {
     "day1": [
         {"from_name": "SecureIT Solutions", "from_email": "sales@secureit-cameras.com", "subject": "Security cameras for apartment buildings - 50% off installation", "body": "Protect your properties with HD security cameras. Our systems include:\n\n- 24/7 cloud recording\n- Motion detection alerts\n- Night vision\n- Mobile app access\n\n50% off installation this month only.\n\nSecureIT Solutions"},
     ],
+    "day_fr": [
+        {"from_name": "SecureIT Solutions", "from_email": "sales@secureit-cameras.com", "subject": "Caméras de sécurité pour immeubles - 50 % de réduction à l'installation", "body": "Protégez vos biens avec des caméras HD. Nos systèmes incluent :\n\n- Enregistrement cloud 24 h/24\n- Alertes de détection de mouvement\n- Vision nocturne\n- Application mobile\n\n50 % de réduction sur l'installation ce mois-ci uniquement.\n\nSecureIT Solutions"},
+    ],
     "day2": [
         {"from_name": "RentCollect Plus", "from_email": "demo@rentcollect-plus.com", "subject": "Automate your rent collection - zero late payments", "body": "Hi,\n\nRentCollect Plus automates rent collection with ACH direct debit. Tenants set it up once and you never chase a late payment again.\n\nSchedule a demo today.\n\nRentCollect Plus"},
     ],
@@ -1312,6 +1321,9 @@ TIMEWASTER_EMAILS = {
     ],
     "day1": [
         {"from_name": "Melissa Rogers", "from_email": "melissa.r.tenant@gmail.com", "subject": "Bird on my balcony - Unit 7, 400 Willow Terrace", "body": "Hi,\n\nThere's a pigeon that has been sitting on my balcony railing every single morning for the past week. It just sits there and stares at me through the glass door while I eat breakfast. It's honestly a little creepy.\n\nIs there anything the building can do? Like put up those spike things? I don't want to hurt it but I also don't want a pigeon watching me eat cereal every morning.\n\nThanks,\nMelissa\nUnit 7"},
+    ],
+    "day_fr": [
+        {"from_name": "Melissa Rogers", "from_email": "melissa.r.tenant@gmail.com", "subject": "Oiseau sur mon balcon - Unité 7, 400 Willow Terrace", "body": "Bonjour,\n\nUn pigeon se pose sur la rambarde de mon balcon chaque matin depuis une semaine. Il reste là et me regarde à travers la porte vitrée pendant que je prends mon petit-déjeuner. C'est un peu inquiétant.\n\nEst-ce que l'immeuble peut faire quelque chose ? Installer des pics par exemple ? Je ne veux pas lui faire de mal mais je ne veux pas non plus qu'un pigeon me regarde manger mes céréales chaque matin.\n\nMerci,\nMelissa\nUnit 7"},
     ],
     "day2": [
         {"from_name": "Crystal Bell", "from_email": "crystal.bell.apt@gmail.com", "subject": "Re: Cat outside the building - 7 Ash Place", "body": "Hi again,\n\nUpdate on the cat situation \u2014 the orange tabby is still here. I've been leaving a little bowl of water out for it (I hope that's okay). My neighbor Gregory says he's seen it too. We've named it Marmalade.\n\nI asked around and nobody in the building claims it. Should I call animal control? I feel bad doing that though. Marmalade seems happy here.\n\nLet me know what you think.\n\nCrystal\nUnit B2"},
@@ -1428,6 +1440,54 @@ _QUESTION_BODIES = [
     "Hi,\n\nIs there a community bulletin board at {addr}? I'd like to post a note about a lost set of keys.\n\n{name}",
 ]
 
+# French filler templates for day_fr batch
+_RENT_SUBJECTS_FR = [
+    "Paiement du loyer envoyé - {addr}",
+    "Loyer du mois - {addr}",
+    "Virement du loyer mensuel - {addr}",
+    "Confirmation de loyer - {addr}",
+    "Loyer déposé - {addr}",
+]
+_RENT_BODIES_FR = [
+    "Bonjour,\n\nJe confirme l'envoi du loyer par virement ce matin.\n\nMerci,\n{name}",
+    "Bonjour,\n\nLe loyer du mois a été viré. Merci de confirmer réception.\n\n{name}",
+    "Bonjour,\n\nLoyer mensuel déposé aujourd'hui.\n\nMerci,\n{name}\n{addr}",
+    "Bonjour,\n\nLoyer envoyé. N'hésitez pas en cas de souci.\n\n{name}",
+    "Bonjour,\n\nJe vous confirme que le loyer a été viré ce matin.\n\nCordialement,\n{name}",
+]
+_MAINT_SUBJECTS_FR = [
+    "Petite réparation nécessaire - {addr}",
+    "Demande d'entretien mineure - {addr}",
+    "Réparation rapide - {addr}",
+    "Question entretien - {addr}",
+]
+_MAINT_BODIES_FR = [
+    "Bonjour,\n\nLa poignée de la porte de la salle de bain est desserrée dans mon logement à {addr}. Elle tient encore mais bouge. L'entretien pourrait la resserrer lors de son passage ?\n\nMerci,\n{name}",
+    "Bonjour,\n\nUne porte de placard de la cuisine à {addr} a une charnière loose. Elle ne se ferme pas bien. Pas urgent mais ce serait bien de la faire réparer.\n\nMerci,\n{name}",
+    "Bonjour,\n\nLe joint d'étanchéité de ma porte d'entrée à {addr} se décolle. Je sens un courant d'air. Quelqu'un pourrait le remplacer ?\n\n{name}",
+    "Bonjour,\n\nLe porte-serviettes de la salle de bain à {addr} est tombé du mur. Les chevilles ont dû lâcher. L'entretien pourrait le réinstaller correctement ?\n\nMerci,\n{name}",
+    "Bonjour,\n\nLe robinet de la cuisine à {addr} fuit un peu. Ce n'est pas encore grave mais je préfère le signaler avant que ça empire.\n\n{name}",
+    "Bonjour,\n\nLa moustiquaire de la porte à {addr} est déchirée. Les insectes entrent. Pourriez-vous la faire réparer ou remplacer ?\n\nMerci,\n{name}",
+    "Bonjour,\n\nL'ampoule du placard de la chambre à {addr} a grillé. Je ne peux pas l'atteindre. L'entretien pourrait la changer ?\n\n{name}",
+    "Bonjour,\n\nLa chasse d'eau de mon logement à {addr} coule par intermittence. Elle s'arrête seule mais gaspille de l'eau. Il faudrait sans doute un nouveau clapet.\n\nMerci,\n{name}",
+]
+_QUESTION_SUBJECTS_FR = [
+    "Question rapide - {addr}",
+    "Question sur le règlement - {addr}",
+    "Question sur le bail - {addr}",
+    "Demande d'information - {addr}",
+]
+_QUESTION_BODIES_FR = [
+    "Bonjour,\n\nEst-ce que je peux installer une sonnette type Ring à mon logement ({addr}) ? Je préfère vérifier avant de percer.\n\nMerci,\n{name}",
+    "Bonjour,\n\nY a-t-il des bacs de tri à {addr} ? Je mets tout à la poubelle pour l'instant mais j'aimerais recycler.\n\n{name}",
+    "Bonjour,\n\nQuelle est la règle pour accrocher des choses aux murs à {addr} ? Je voudrais poser des étagères sans perdre ma caution.\n\nMerci,\n{name}",
+    "Bonjour,\n\nAvez-vous un serrurier à recommander ? J'aimerais faire un double de clé pour mon logement à {addr}.\n\n{name}",
+    "Bonjour,\n\nY a-t-il un barbecue pour les résidents à {addr} ? J'ai vu une terrasse mais je ne sais pas si les grillades sont autorisées.\n\nMerci,\n{name}",
+    "Bonjour,\n\nQuel est le jour de collecte des ordures pour {addr} ? Je viens d'emménager et je veux sortir les bacs le bon jour.\n\n{name}",
+    "Bonjour,\n\nPuis-je repeindre les murs de mon logement à {addr} ? Je les repeindrai à la couleur d'origine avant de partir.\n\nMerci,\n{name}",
+    "Bonjour,\n\nY a-t-il un tableau d'affichage à {addr} ? Je voudrais afficher un mot pour des clés perdues.\n\n{name}",
+]
+
 _MONTHS = ["October", "November", "December", "January"]
 
 
@@ -1439,6 +1499,14 @@ def _generate_filler(batch: str, target: int, current: int) -> list:
 
     rng = _random.Random(f"elron-filler-{batch}")
     filler = []
+    use_french = batch == "day_fr"
+
+    subj_rent = _RENT_SUBJECTS_FR if use_french else _RENT_SUBJECTS
+    body_rent = _RENT_BODIES_FR if use_french else _RENT_BODIES
+    subj_maint = _MAINT_SUBJECTS_FR if use_french else _MAINT_SUBJECTS
+    body_maint = _MAINT_BODIES_FR if use_french else _MAINT_BODIES
+    subj_question = _QUESTION_SUBJECTS_FR if use_french else _QUESTION_SUBJECTS
+    body_question = _QUESTION_BODIES_FR if use_french else _QUESTION_BODIES
 
     for i in range(needed):
         tenant = rng.choice(_FILLER_TENANT_POOL)
@@ -1448,16 +1516,16 @@ def _generate_filler(batch: str, target: int, current: int) -> list:
 
         roll = rng.random()
         if roll < 0.50:
-            subj = rng.choice(_RENT_SUBJECTS).format(**fmt)
-            body = rng.choice(_RENT_BODIES).format(**fmt)
+            subj = rng.choice(subj_rent).format(**fmt)
+            body = rng.choice(body_rent).format(**fmt)
         elif roll < 0.80:
-            subj = rng.choice(_MAINT_SUBJECTS).format(**fmt)
-            body = rng.choice(_MAINT_BODIES).format(**fmt)
+            subj = rng.choice(subj_maint).format(**fmt)
+            body = rng.choice(body_maint).format(**fmt)
         else:
-            subj = rng.choice(_QUESTION_SUBJECTS).format(**fmt)
-            body = rng.choice(_QUESTION_BODIES).format(**fmt)
+            subj = rng.choice(subj_question).format(**fmt)
+            body = rng.choice(body_question).format(**fmt)
 
-        # Add month variation for history
+        # Add month variation for history (English only)
         if batch == "history":
             month = rng.choice(_MONTHS)
             subj = subj.replace("this month", month).replace("Rent for", f"Rent for {month} -")
@@ -1479,6 +1547,7 @@ _BATCH_TARGETS = {
     "day2": 40,
     "day3": 35,
     "day4": 30,
+    "day_fr": 50,
     "month1": 40,
     "month2": 35,
 }

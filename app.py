@@ -26,7 +26,7 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(32))
 SCOPES = ["https://mail.google.com/"]
 CREDENTIALS_FILE = "credentials.json"
 
-VALID_BATCHES = ["history", "day1", "day2", "day3", "day4", "month1", "month2"]
+VALID_BATCHES = ["history", "day1", "day2", "day3", "day4", "day_fr", "month1", "month2"]
 
 # Fixed date ranges for each batch (all dates in 2026).
 # Each value is (start_date, end_date) — emails are spread across this range.
@@ -36,6 +36,7 @@ BATCH_DATE_RANGES = {
     "day2":    (datetime(2026, 1, 17, tzinfo=timezone.utc), datetime(2026, 1, 17, 23, 59, tzinfo=timezone.utc)),
     "day3":    (datetime(2026, 1, 18, tzinfo=timezone.utc), datetime(2026, 1, 18, 23, 59, tzinfo=timezone.utc)),
     "day4":    (datetime(2026, 1, 19, tzinfo=timezone.utc), datetime(2026, 1, 19, 23, 59, tzinfo=timezone.utc)),
+    "day_fr":  (datetime(2026, 1, 20, tzinfo=timezone.utc), datetime(2026, 1, 20, 23, 59, tzinfo=timezone.utc)),
     "month1":  (datetime(2026, 1, 20, tzinfo=timezone.utc), datetime(2026, 2, 1, 23, 59, tzinfo=timezone.utc)),
     "month2":  None,  # special: Feb 1 → today
 }
@@ -49,6 +50,7 @@ BATCH_INFO = {
     "day2":    {"label": "Day 2", "desc": "Jan 17 — follow-ups", "icon": "&#128197;", "color": "#2563eb"},
     "day3":    {"label": "Day 3", "desc": "Jan 18 — quotes & invoices", "icon": "&#128196;", "color": "#0891b2"},
     "day4":    {"label": "Day 4", "desc": "Jan 19 — closures", "icon": "&#9989;", "color": "#059669"},
+    "day_fr":  {"label": "Jour 1 (FR)", "desc": "20 janv. — 50 mails en français", "icon": "&#127467;&#127479;", "color": "#0369a1"},
     "month1":  {"label": "Month 1", "desc": "Jan 20 – Feb 1", "icon": "&#128197;", "color": "#d97706"},
     "month2":  {"label": "Month 2", "desc": "Feb 1 – today", "icon": "&#128197;", "color": "#dc2626"},
 }
@@ -586,7 +588,7 @@ HTML_DASHBOARD = """
   <div class="sequence-label">Inject in order &darr;</div>
 
   <div class="batch-grid">
-    {% for batch_key in ["history", "day1", "day2", "day3", "day4", "month1", "month2"] %}
+    {% for batch_key in ["history", "day1", "day2", "day3", "day4", "day_fr", "month1", "month2"] %}
     {% set b = batches[batch_key] %}
     <div class="batch-card">
       <div class="batch-icon">{{ b.icon | safe }}</div>
