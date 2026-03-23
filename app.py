@@ -56,7 +56,7 @@ BATCH_INFO = {
     "day_fr":  {"label": "Jour 1 (FR)", "desc": "20 janv. — 50 mails en français", "icon": "&#127467;&#127479;", "color": "#0369a1"},
     "month1":  {"label": "Month 1", "desc": "Jan 20 – Feb 1", "icon": "&#128197;", "color": "#d97706"},
     "month2":  {"label": "Month 2", "desc": "Feb 1 – today", "icon": "&#128197;", "color": "#dc2626"},
-    "fr_full": {"label": "Simulation FR", "desc": "300 emails FR — 50 inbox + 250 archivés", "icon": "&#127467;&#127479;", "color": "#1d4ed8"},
+    "fr_full": {"label": "Simulation FR", "desc": "300 emails FR — 30 inbox + 270 archivés", "icon": "&#127467;&#127479;", "color": "#1d4ed8"},
 }
 
 # ---------------------------------------------------------------------------

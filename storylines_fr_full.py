@@ -723,7 +723,7 @@ FR_STORYLINES.append({
             "is_reply": True,
         },
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Alexandre Morel",
             "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Fuite colonne montante 15 rue des Lilas",
@@ -771,7 +771,7 @@ FR_STORYLINES.append({
             "is_reply": True,
         },
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Alexandre Morel",
             "from_email": "relaylegacy@gmail.com",
             "subject": "Fwd: Chauffage toujours pas réparé correctement - Les Tilleuls",
@@ -779,7 +779,7 @@ FR_STORYLINES.append({
             "is_reply": False,
         },
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Philippe de Villiers",
             "from_email": "p.devilliers@orange.fr",
             "subject": "Re: Chauffage toujours pas réparé correctement - Les Tilleuls",
@@ -827,7 +827,7 @@ FR_STORYLINES.append({
             "is_reply": False,
         },
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Alexandre Morel",
             "from_email": "relaylegacy@gmail.com",
             "subject": "Fwd: Devis reprise plafond et murs - 8 av Foch Apt 2A",
@@ -835,7 +835,7 @@ FR_STORYLINES.append({
             "is_reply": False,
         },
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Marie-Claire Fontaine",
             "from_email": "mc.fontaine@sfr.fr",
             "subject": "Re: Devis reprise plafond et murs - 8 av Foch Apt 2A",
@@ -875,7 +875,7 @@ FR_STORYLINES.append({
             "is_reply": True,
         },
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Julie Renard",
             "from_email": "j.renard@elron-gestion.fr",
             "subject": "Fwd: Relance facture FAC-2025-0391 - Duplex Plomberie",
@@ -2271,7 +2271,7 @@ def _generate_fr_filler(count: int, section: str) -> list:
 # Main function: return all ~300 emails ordered (archived first, inbox last)
 # ---------------------------------------------------------------------------
 def get_fr_full_emails() -> list:
-    """Return ~300 French emails: first 250 archived, last 50 inbox."""
+    """Return ~300 French emails: first 270 archived, last 30 inbox."""
     archived = []
     inbox = []
 
@@ -2310,8 +2310,8 @@ def get_fr_full_emails() -> list:
         })
 
     # Pad with filler to reach targets
-    archived_target = 250
-    inbox_target = 50
+    archived_target = 270
+    inbox_target = 30
 
     if len(archived) < archived_target:
         filler = _generate_fr_filler(archived_target - len(archived), "archived")
@@ -2333,5 +2333,5 @@ def get_fr_full_emails() -> list:
                 "is_reply": False,
             })
 
-    # Return archived (first 250) then inbox (last 50)
+    # Return archived (first 270) then inbox (last 30)
     return archived[:archived_target] + inbox[:inbox_target]
