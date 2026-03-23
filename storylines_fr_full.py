@@ -100,7 +100,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Fuite robinet cuisine - 15 rue des Lilas Apt 3B",
             "body": "Bonjour Madame Petit,\n\nMerci pour votre signalement. J'ai contacté notre plombier (Duplex Plomberie) qui devrait pouvoir passer cette semaine.\n\nJe vous tiens au courant dès que j'ai un créneau.\n\nCordialement,\nAlexandre Morel\nGestionnaire locatif - Elron Gestion",
             "is_reply": True,
@@ -116,7 +116,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Fwd: Fuite robinet cuisine - 15 rue des Lilas Apt 3B - Devis plombier",
             "body": "Bonjour M. Delacroix,\n\nVeuillez trouver ci-dessous le devis du plombier pour la fuite chez Mme Petit (Apt 3B, 15 rue des Lilas).\n\nMontant estimé entre 125 et 180€ TTC. C'est de l'entretien courant, ça reste à la charge du propriétaire.\n\nPouvez-vous valider pour que je confirme l'intervention ?\n\nCordialement,\nAlexandre Morel",
             "is_reply": False,
@@ -156,8 +156,8 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
-            "subject": "Rappel loyer novembre - Urgent",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Rappel loyer novembre",
             "body": "Bonjour Monsieur Benamara,\n\nSauf erreur de notre part, nous n'avons pas reçu votre règlement de loyer pour le mois de novembre 2025.\n\nMontant : 720,00 € (loyer + charges)\nÉchéance : 05/11/2025\n\nNous vous remercions de bien vouloir procéder au règlement dans les meilleurs délais. En cas de difficulté, n'hésitez pas à nous contacter pour trouver une solution.\n\nCordialement,\nAlexandre Morel\nElron Gestion Immobilière",
             "is_reply": False,
         },
@@ -165,15 +165,15 @@ FR_STORYLINES.append({
             "archived": True,
             "from_name": "Karim Benamara",
             "from_email": "k.benamara.loc@gmail.com",
-            "subject": "Re: Rappel loyer novembre - Urgent",
+            "subject": "Re: Rappel loyer novembre",
             "body": "Bonjour M. Morel\n\nDésolé pour le retard je sais que c'est pas la première fois. J'ai eu des soucis au boulot, j'ai été en arrêt maladie 3 semaines et ça a décalé ma paie.\n\nJe peux pas tout payer d'un coup mais je peux faire un virement de 400€ cette semaine et le reste fin décembre. Est ce que c'est possible ?\n\nMerci de votre compréhension\nK. Benamara",
             "is_reply": True,
         },
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
-            "subject": "Re: Rappel loyer novembre - Urgent",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Rappel loyer novembre",
             "body": "Bonjour Monsieur Benamara,\n\nJe comprends votre situation. Voici ce que je vous propose :\n\n- 400€ avant le 6 décembre (novembre - 1er versement)\n- 320€ avant le 20 décembre (solde novembre)\n- Loyer de décembre (720€) à l'échéance normale du 5 janvier\n\nMerci de me confirmer par retour de mail que cet échéancier vous convient. Je vous enverrai un courrier de confirmation.\n\nAttention : tout nouveau retard nous obligerait à engager une procédure.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
         },
@@ -181,7 +181,7 @@ FR_STORYLINES.append({
             "archived": True,
             "from_name": "Karim Benamara",
             "from_email": "k.benamara.loc@gmail.com",
-            "subject": "Re: Rappel loyer novembre - Urgent",
+            "subject": "Re: Rappel loyer novembre",
             "body": "Oui c'est bon pour moi merci. Je fais le virement de 400 demain.\n\nBenamara",
             "is_reply": True,
         },
@@ -215,6 +215,14 @@ FR_STORYLINES.append({
             "from_email": "service@azur-ascenseurs.fr",
             "subject": "Re: Ascenseur en panne - Résidence Les Tilleuls",
             "body": "Bonjour M. Lefèvre,\n\nNotre technicien est intervenu ce jour. Diagnostic : carte électronique de commande défaillante.\n\nLa pièce doit être commandée (délai 3-5 jours ouvrés). L'ascenseur restera immobilisé pendant ce temps.\n\nDevis réparation :\n- Carte électronique Otis MCS220 : 1 250,00 € HT\n- Main d'œuvre pose et programmation (2h) : 180,00 € HT\n- Déplacement diagnostic : offert (contrat de maintenance)\nTotal HT : 1 430,00 €\nTVA 20% : 286,00 €\nTotal TTC : 1 716,00 €\n\nMerci de valider pour commande de la pièce.\n\nCordialement,\nSébastien Mercier\nAzur Ascenseurs\n\n---\n📎 Pièce jointe : devis_AZR-2025-1203.pdf (156 Ko)\n📎 Pièce jointe : rapport_intervention_20251218.pdf (89 Ko)",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Ascenseur en panne - Résidence Les Tilleuls",
+            "body": "Thomas,\n\nOK pour le devis Azur, valide la commande de la pièce.\n\nPeux-tu afficher une note dans le hall pour prévenir tous les locataires du délai de réparation ?\n\nAlexandre",
             "is_reply": True,
         },
     ],
@@ -299,7 +307,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Préavis de départ - A. Rodriguez - 5 impasse des Acacias Apt 1C",
             "body": "Bonjour Monsieur Rodriguez,\n\nJ'accuse réception de votre préavis de départ. Votre préavis d'un mois courra à compter de la réception de ce mail, soit une fin de bail au 31 décembre 2025.\n\nJe vous propose les créneaux suivants pour l'état des lieux de sortie :\n- Lundi 29 décembre à 10h00\n- Mardi 30 décembre à 14h00\n- Mercredi 31 décembre à 9h00\n\nMerci de me confirmer votre préférence.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -315,7 +323,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Préavis de départ - A. Rodriguez - 5 impasse des Acacias Apt 1C",
             "body": "Bonjour,\n\nC'est noté pour le 30/12 à 14h.\n\nConcernant le dépôt de garantie (650€), il vous sera restitué dans un délai maximum d'un mois après l'état des lieux de sortie si celui-ci est conforme. En cas de dégradations constatées, des retenues pourront être appliquées conformément à la loi.\n\nN'hésitez pas à nettoyer l'appartement et à reboucher les trous de fixation avant l'état des lieux.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -339,7 +347,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Nuisances sonores insupportables - 15 rue des Lilas",
             "body": "Bonjour Madame Lambert,\n\nJe comprends votre frustration et je prends ce sujet au sérieux.\n\nJ'ai envoyé un courrier recommandé à Mme Petit lui rappelant les clauses du règlement intérieur concernant les nuisances sonores (respect du voisinage, interdiction de bruit excessif après 22h).\n\nJe vous recommande également, si les nuisances persistent, de contacter la police municipale lors des faits pour constituer un dossier.\n\nJe vous tiens informée des suites.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -363,7 +371,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Renouvellement bail - Dupont - 8 avenue Foch Apt 2B",
             "body": "Bonjour Monsieur et Madame Dupont,\n\nVotre bail arrive à échéance le 28 février 2026. Conformément à la loi, je vous informe que la propriétaire, Mme Fontaine, souhaite renouveler votre bail.\n\nLe loyer actuel de 1 150,00 € sera révisé selon l'IRL du 3ème trimestre 2025, soit une augmentation de 2,47%.\n\nNouveau loyer proposé : 1 178,41 € / mois (charges comprises : 1 328,41 €)\n\nMerci de me faire part de votre réponse avant le 15 janvier 2026.\n\nCordialement,\nAlexandre Morel\nElron Gestion\n\n---\n📎 Pièce jointe : proposition_renouvellement_bail_dupont.pdf (78 Ko)",
             "is_reply": False,
@@ -379,7 +387,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Renouvellement bail - Dupont - 8 avenue Foch Apt 2B",
             "body": "Bonjour,\n\nJ'ai transmis votre demande à Mme Fontaine. Elle accepte de faire réaliser un diagnostic humidité et les travaux nécessaires au printemps 2026.\n\nEn revanche, la révision de loyer selon l'IRL est légale et sera appliquée. Nous pouvons toutefois reporter la date d'effet de la révision au 1er avril 2026 (après les travaux).\n\nEst-ce que cela vous convient ?\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -432,6 +440,14 @@ FR_STORYLINES.append({
             "body": "M. Lefèvre,\n\nIntervention d'urgence effectuée ce matin.\n\nPanne identifiée : défaut sur le brûleur (électrode d'allumage + câble haute tension à remplacer). Réparation provisoire effectuée, le chauffage est remis en route.\n\nLes pièces définitives seront posées en début de semaine prochaine.\n\nFacture intervention urgence : 320,00 € TTC\nDevis remplacement pièces : 485,00 € TTC\n\nCordialement,\nJérôme Tissier\nThermoConfort\n\n---\n📎 Pièce jointe : rapport_intervention_TC-2025-12-19.pdf (145 Ko)",
             "is_reply": True,
         },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Chauffage collectif en panne - Résidence Les Tilleuls",
+            "body": "Merci Thomas. OK pour le remplacement des pièces, valide avec ThermoConfort.\n\nM. Leroy, M. Mercier : le chauffage est remis en route. N'hésitez pas à me signaler si le problème persiste.\n\nAlexandre Morel",
+            "is_reply": True,
+        },
     ],
 })
 
@@ -451,7 +467,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Dégât des eaux - 8 avenue Foch Apt 2A",
             "body": "Bonjour Madame Martin,\n\nMerci pour les photos. J'ai immédiatement :\n1. Contacté le plombier pour une recherche de fuite en urgence\n2. Prévenu l'occupant de l'appartement 3A (au-dessus)\n3. Ouvert un dossier sinistre auprès de l'assurance de l'immeuble\n\nVous devez de votre côté déclarer le sinistre à votre propre assurance habitation dans les 5 jours.\n\nVoici le numéro de déclaration côté propriétaire : SIN-2025-1207-003\n\nJe reviens vers vous très vite.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -459,7 +475,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Dégât des eaux 8 av Foch - Constat amiable et expertise",
             "body": "Bonjour Madame Fontaine,\n\nJe vous informe d'un dégât des eaux survenu dans l'appartement 2A (Mme Martin). L'infiltration provient vraisemblablement de l'appartement 3A au-dessus.\n\nLa déclaration de sinistre a été faite (réf. SIN-2025-1207-003). L'assureur envoie un expert le 15/12.\n\nLe plombier a identifié une fuite sur un raccord de la douche du 3A. La réparation a été faite (210€ TTC).\n\nReste à chiffrer : reprise du plafond et peinture dans le 2A. Je vous ferai suivre le devis.\n\nCordialement,\nAlexandre Morel\n\n---\n📎 Pièce jointe : declaration_sinistre_SIN-2025-1207-003.pdf (67 Ko)\n📎 Pièce jointe : constat_amiable_degat_eaux.pdf (234 Ko)",
             "is_reply": False,
@@ -570,6 +586,14 @@ FR_STORYLINES.append({
         },
         {
             "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Invasion cafards - 17 rue du Marché Apt 1A",
+            "body": "Mme Moreau,\n\nPour info, l'intervention est confirmée pour le 18/12. Nadia va distribuer un courrier à tous les résidents.\n\nN'hésitez pas à me contacter si vous avez des questions.\n\nCordialement,\nAlexandre Morel",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
             "from_name": "SOS Nuisibles",
             "from_email": "intervention@sos-nuisibles.fr",
             "subject": "Compte-rendu intervention - 17 rue du Marché",
@@ -651,63 +675,191 @@ FR_STORYLINES.append({
     ],
 })
 
-# === INBOX THREADS (recent, in inbox) ===
+# === INBOX THREADS (recent, in inbox — mix of short/long, with/without PJ) ===
 
-# === 17. NOUVELLE FUITE — 23 rue Voltaire (récente, inbox) ===
+# === 17. LONG THREAD — Fuite colonne montante 15 rue des Lilas (7 msgs, mixed archived/inbox) ===
 FR_STORYLINES.append({
-    "id": "fuite_voltaire_recent",
-    "thread_subject": "URGENT - Fuite d'eau importante - 23 rue Voltaire parties communes",
+    "id": "fuite_colonne_lilas",
+    "thread_subject": "Fuite colonne montante 15 rue des Lilas",
     "emails": [
         {
-            "archived": False,
-            "from_name": "Nathalie Simon",
-            "from_email": "n.simon.loc@gmail.com",
-            "subject": "URGENT - Fuite d'eau importante - 23 rue Voltaire parties communes",
-            "body": "BONJOUR\n\nIl y a une fuite d'eau dans le hall d'entrée du 23 rue voltaire !!! L'eau coule du plafond du hall, ça forme une flaque énorme devant les boites aux lettres.\n\nJ'ai mis des serpillières mais ça suffit pas. C'est URGENT quelqu'un peut venir ???\n\nNathalie Simon Apt 1A",
+            "archived": True,
+            "from_name": "Christine Lambert",
+            "from_email": "c.lambert.appt@gmail.com",
+            "subject": "Fuite colonne montante 15 rue des Lilas",
+            "body": "Bonjour,\n\nIl y a une fuite d'eau dans le couloir du 3ème étage, entre l'appartement 3B et le 4A. L'eau coule le long du mur près de la colonne montante.\n\nC. Lambert Apt 4A",
             "is_reply": False,
         },
         {
-            "archived": False,
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Fuite colonne montante 15 rue des Lilas",
+            "body": "Bonjour Mme Lambert,\n\nMerci pour le signalement. Je contacte le plombier immédiatement.\n\nThomas, tu peux passer sur place voir l'étendue des dégâts ?\n\nAlexandre",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
             "from_name": "Thomas Lefèvre",
             "from_email": "t.lefevre@elron-gestion.fr",
-            "subject": "Re: URGENT - Fuite d'eau importante - 23 rue Voltaire parties communes",
-            "body": "Bonjour Mme Simon,\n\nMerci pour l'alerte. J'envoie le plombier en urgence. En attendant, si vous pouvez couper l'arrivée d'eau générale (vanne dans le local technique au sous-sol, porte à droite en bas de l'escalier), ça limiterait les dégâts.\n\nJe passe sur place dans l'heure.\n\nThomas Lefèvre",
+            "subject": "Re: Fuite colonne montante 15 rue des Lilas",
+            "body": "J'y suis. C'est la colonne montante entre le 3ème et 4ème. Fuite sur un raccord cuivre. Duplex Plomberie peut venir demain matin.\n\nJ'ai coupé l'eau de la colonne en attendant.\n\nThomas",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Fuite colonne montante 15 rue des Lilas",
+            "body": "OK merci. Préviens les locataires du 3ème et 4ème qu'il n'y aura pas d'eau ce soir sur cette colonne.\n\nJe préviens Delacroix (proprio).\n\nAlexandre",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Duplex Plomberie",
+            "from_email": "contact@duplex-plomberie.fr",
+            "subject": "Re: Fuite colonne montante 15 rue des Lilas",
+            "body": "Bonjour,\n\nIntervention effectuée ce matin. Le raccord cuivre était corrodé, remplacement complet du tronçon (environ 60cm).\n\nL'eau est rétablie. RAS sur les autres raccords de la colonne.\n\nFacture ci-jointe.\n\nCordialement,\nDuplex Plomberie\n\n---\n📎 Pièce jointe : facture_FAC-2026-0042.pdf (87 Ko)\n📎 Pièce jointe : photos_intervention_colonne.pdf (1.4 Mo)",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Fuite colonne montante 15 rue des Lilas",
+            "body": "Merci. Thomas, tu peux vérifier qu'il n'y a pas de dégâts dans les apparts ?\n\nMme Lambert, Mme Petit : est-ce que tout est OK chez vous après la réparation ? Pas de traces d'humidité ?\n\nAlexandre Morel",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Christine Lambert",
+            "from_email": "c.lambert.appt@gmail.com",
+            "subject": "Re: Fuite colonne montante 15 rue des Lilas",
+            "body": "Bonjour M. Morel,\n\nChez moi c'est OK, pas de dégât. Par contre le mur du couloir est encore humide et la peinture commence à cloquer. Il faudra prévoir une reprise de peinture.\n\nCordialement,\nC. Lambert",
             "is_reply": True,
         },
     ],
 })
 
-# === 18. RÉCLAMATION CHAUFFAGE encore ===
+# === 18. LONG THREAD — Chauffage Les Tilleuls v2 (6 msgs, multi-PJ, mixed) ===
 FR_STORYLINES.append({
     "id": "chauffage_v2_mercier",
     "thread_subject": "Chauffage toujours pas réparé correctement - Les Tilleuls",
     "emails": [
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Olivier Mercier",
             "from_email": "o.mercier.loc@gmail.com",
             "subject": "Chauffage toujours pas réparé correctement - Les Tilleuls",
-            "body": "Bonjour,\n\nLe chauffage a été réparé en décembre mais depuis la semaine dernière ça recommence. Les radiateurs du salon et de la chambre sont tièdes au mieux. Il fait à peine 17 degrés chez moi.\n\nC'est quand même la 2ème fois cet hiver. Est-ce qu'il faudrait pas envisager de changer la chaudière ? Elle a quel âge ?\n\nMerci de faire le nécessaire.\n\nO. Mercier",
+            "body": "Bonjour,\n\nLe chauffage a été réparé en décembre mais depuis la semaine dernière ça recommence. Les radiateurs du salon et de la chambre sont tièdes au mieux. Il fait à peine 17 degrés chez moi.\n\nC'est quand même la 2ème fois cet hiver. Est-ce qu'il faudrait pas envisager de changer la chaudière ?\n\nO. Mercier",
+            "is_reply": False,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Chauffage toujours pas réparé correctement - Les Tilleuls",
+            "body": "Bonjour M. Mercier,\n\nDésolé pour ce désagrément. Je fais revenir ThermoConfort cette semaine.\n\nLa chaudière a 18 ans, on a effectivement commencé à demander des devis pour le remplacement. Je vous tiens au courant.\n\nCordialement,\nAlexandre Morel",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "ThermoConfort SARL",
+            "from_email": "devis@thermoconfort.fr",
+            "subject": "Re: Chauffage toujours pas réparé correctement - Les Tilleuls",
+            "body": "Bonjour M. Morel,\n\nIntervention faite. Le circulateur est fatigué, il tourne mais ne pousse plus assez d'eau chaude. Remplacement nécessaire.\n\nDevis ci-joint pour le circulateur + purge complète du circuit.\n\nCordialement,\nThermoConfort\n\n---\n📎 Pièce jointe : devis_TC-2026-0089.pdf (67 Ko)\n📎 Pièce jointe : rapport_diagnostic_chauffage.pdf (234 Ko)",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Fwd: Chauffage toujours pas réparé correctement - Les Tilleuls",
+            "body": "M. de Villiers,\n\nSuite à la nouvelle panne de chauffage, le chauffagiste propose le remplacement du circulateur (485€ TTC, devis en PJ).\n\nEn parallèle je vous ai envoyé les 3 devis pour le remplacement complet de la chaudière. Merci de me donner votre accord sur le circulateur en attendant votre décision sur la chaudière.\n\nCordialement,\nAlexandre Morel\n\n---\n📎 Pièce jointe : devis_TC-2026-0089.pdf (67 Ko)\n📎 Pièce jointe : comparatif_devis_chaudiere_tilleuls.pdf (234 Ko)",
             "is_reply": False,
         },
         {
             "archived": False,
-            "from_name": "Thomas Lefèvre",
-            "from_email": "t.lefevre@elron-gestion.fr",
+            "from_name": "Philippe de Villiers",
+            "from_email": "p.devilliers@orange.fr",
             "subject": "Re: Chauffage toujours pas réparé correctement - Les Tilleuls",
-            "body": "Bonjour M. Mercier,\n\nJe rappelle ThermoConfort aujourd'hui. Vous avez raison, la chaudière a 18 ans (installée en 2008) et commence à montrer des signes de fatigue.\n\nJ'ai déjà alerté le propriétaire sur la nécessité de prévoir son remplacement. Je vais demander des devis pour une chaudière neuve en parallèle de la réparation.\n\nJe vous tiens au courant.\n\nCordialement,\nThomas Lefèvre",
+            "body": "OK pour le circulateur, faites le nécessaire.\n\nPour la chaudière, on prend le De Dietrich à 11 500€ comme convenu. Planifiez ça pour mars.\n\nCdt,\nPh. de Villiers",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Olivier Mercier",
+            "from_email": "o.mercier.loc@gmail.com",
+            "subject": "Re: Chauffage toujours pas réparé correctement - Les Tilleuls",
+            "body": "Bonjour,\n\nDes nouvelles ? Le chauffage est toujours en panne chez moi. On est vendredi et personne n'est passé cette semaine.\n\nO. Mercier",
             "is_reply": True,
         },
     ],
 })
 
-# === 19. FACTURE IMPAYÉE prestataire ===
+# === 19. LONG THREAD — Dégât des eaux suivi assurance (6 msgs, multi-PJ) ===
+FR_STORYLINES.append({
+    "id": "degat_eaux_suivi",
+    "thread_subject": "Suivi dégât des eaux 8 av Foch - Expertise et réparations",
+    "emails": [
+        {
+            "archived": True,
+            "from_name": "Groupama Assurances",
+            "from_email": "mr.sinistres@groupama.fr",
+            "subject": "Suivi dégât des eaux 8 av Foch - Expertise et réparations",
+            "body": "Bonjour,\n\nSuite à l'expertise du 7 janvier, voici les conclusions de notre expert M. Leclercq :\n\n- Origine du sinistre : fuite raccord douche Apt 3A\n- Dommages Apt 2A : plafond SDB gonflé, peinture cloquée, traces humidité mur\n- Montant estimé des réparations : 2 340€ TTC\n\nRapport complet ci-joint. Merci de nous transmettre les devis de remise en état.\n\nCordialement,\nGroupama\n\n---\n📎 Pièce jointe : rapport_expertise_SIN-2025-1207-003.pdf (456 Ko)\n📎 Pièce jointe : photos_expertise.zip (3.2 Mo)",
+            "is_reply": False,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Suivi dégât des eaux 8 av Foch - Expertise et réparations",
+            "body": "Bonjour,\n\nMerci pour le rapport. Je fais chiffrer les réparations par notre peintre et je vous transmets le devis.\n\nCordialement,\nAlexandre Morel\nElron Gestion",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Peinture & Ravalement Girard",
+            "from_email": "devis@girard-ravalement.fr",
+            "subject": "Devis reprise plafond et murs - 8 av Foch Apt 2A",
+            "body": "Bonjour M. Morel,\n\nSuite à ma visite, voici le devis pour la reprise des dégâts :\n\n- Grattage et ponçage plafond SDB : 180€ HT\n- Application enduit de rebouchage : 120€ HT\n- Peinture plafond (2 couches) : 280€ HT\n- Reprise peinture mur (zone touchée) : 220€ HT\n- Traitement anti-humidité : 150€ HT\n\nTotal HT : 950€\nTVA 10% : 95€\nTotal TTC : 1 045€\n\nDisponibilité : semaine du 10 février.\n\nCordialement,\nP. Girard\n\n---\n📎 Pièce jointe : devis_GIR-2026-0023.pdf (78 Ko)",
+            "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Fwd: Devis reprise plafond et murs - 8 av Foch Apt 2A",
+            "body": "Mme Fontaine,\n\nVoici le devis du peintre pour la reprise des dégâts suite au dégât des eaux chez Mme Martin (Apt 2A). Montant : 1 045€ TTC.\n\nL'assurance devrait couvrir la majeure partie. Je transmets le devis à Groupama.\n\nCordialement,\nAlexandre Morel\n\n---\n📎 Pièce jointe : devis_GIR-2026-0023.pdf (78 Ko)\n📎 Pièce jointe : rapport_expertise_SIN-2025-1207-003.pdf (456 Ko)",
+            "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Marie-Claire Fontaine",
+            "from_email": "mc.fontaine@sfr.fr",
+            "subject": "Re: Devis reprise plafond et murs - 8 av Foch Apt 2A",
+            "body": "Bonjour M. Morel,\n\nD'accord pour le devis. Allez-y pour les travaux et transmettez à l'assurance.\n\nMerci pour le suivi.\n\nMC Fontaine",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Isabelle Martin",
+            "from_email": "i.martin.locataire@gmail.com",
+            "subject": "Re: Suivi dégât des eaux 8 av Foch - Expertise et réparations",
+            "body": "Bonjour M. Morel,\n\nJ'ai vu qu'un peintre doit passer pour les réparations. Est-ce que vous avez une date ? Je dois poser un jour de congé pour être présente.\n\nAussi, le plafond de la SDB fait un drôle de bruit quand le voisin du dessus marche, c'est normal ?\n\nCordialement,\nI. Martin",
+            "is_reply": True,
+        },
+    ],
+})
+
+# === 20. THREAD INBOX — Facture impayée prestataire (4 msgs) ===
 FR_STORYLINES.append({
     "id": "facture_impayee_plombier",
     "thread_subject": "Relance facture FAC-2025-0391 - Duplex Plomberie",
     "emails": [
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Duplex Plomberie",
             "from_email": "contact@duplex-plomberie.fr",
             "subject": "Relance facture FAC-2025-0391 - Duplex Plomberie",
@@ -715,44 +867,164 @@ FR_STORYLINES.append({
             "is_reply": False,
         },
         {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Relance facture FAC-2025-0391 - Duplex Plomberie",
+            "body": "Bonjour,\n\nDésolé pour le retard. La facture est à la charge du propriétaire (M. Delacroix) et nous attendons sa provision. Je le relance aujourd'hui.\n\nCordialement,\nAlexandre Morel",
+            "is_reply": True,
+        },
+        {
             "archived": False,
             "from_name": "Julie Renard",
             "from_email": "j.renard@elron-gestion.fr",
             "subject": "Fwd: Relance facture FAC-2025-0391 - Duplex Plomberie",
-            "body": "Sophie,\n\nLe plombier nous relance pour la facture de la fuite chez Petit (15 rue des Lilas). C'est la 2ème relance, 45 jours de retard.\n\nC'est le proprio Delacroix qui doit payer mais on n'a toujours pas reçu sa provision. Tu veux que je le relance directement ?\n\nJulie",
+            "body": "Alexandre,\n\nLe plombier nous relance encore. C'est la 3ème relance maintenant. Delacroix n'a toujours pas payé sa provision.\n\nOn fait quoi ? On avance le paiement et on se fait rembourser, ou on attend encore ?\n\nJulie",
             "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Duplex Plomberie",
+            "from_email": "contact@duplex-plomberie.fr",
+            "subject": "Re: Relance facture FAC-2025-0391 - Duplex Plomberie",
+            "body": "Bonjour,\n\n3ème et dernière relance. Sans règlement sous 15 jours, nous transmettrons le dossier à notre cabinet de recouvrement.\n\nCordialement,\nDuplex Plomberie\n\n---\n📎 Pièce jointe : mise_en_demeure_FAC-2025-0391.pdf (56 Ko)",
+            "is_reply": True,
         },
     ],
 })
 
-# === 20. CANDIDATURE NOUVEAU LOCATAIRE ===
+# === 21. THREAD INBOX — Candidature locataire (5 msgs avec échanges) ===
 FR_STORYLINES.append({
     "id": "candidature_nantes",
     "thread_subject": "Candidature location - T2 17 rue du Marché Apt 2B",
     "emails": [
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Léa Bertrand",
             "from_email": "lea.bertrand.pro@gmail.com",
             "subject": "Candidature location - T2 17 rue du Marché Apt 2B",
-            "body": "Bonjour,\n\nSuite à la visite du T2 au 17 rue du Marché (Apt 2B) samedi dernier, je souhaite déposer ma candidature.\n\nJe suis infirmière au CHU de Nantes, en CDI depuis 3 ans. Mon salaire net est de 2 200€/mois.\n\nVous trouverez ci-joint mon dossier complet :\n- Pièce d'identité\n- 3 derniers bulletins de salaire\n- Contrat de travail\n- Avis d'imposition 2024\n- Quittances de loyer actuelles\n- Attestation de mon employeur\n\nJe suis disponible pour un 2ème rendez-vous si nécessaire.\n\nCordialement,\nLéa Bertrand\n06 XX XX XX XX\n\n---\n📎 Pièce jointe : dossier_candidature_bertrand.pdf (3.2 Mo)",
+            "body": "Bonjour,\n\nSuite à la visite du T2 au 17 rue du Marché (Apt 2B) samedi dernier, je souhaite déposer ma candidature.\n\nJe suis infirmière au CHU de Nantes, en CDI depuis 3 ans. Mon salaire net est de 2 200€/mois.\n\nVous trouverez ci-joint mon dossier complet.\n\nCordialement,\nLéa Bertrand\n\n---\n📎 Pièce jointe : dossier_candidature_bertrand.pdf (3.2 Mo)",
             "is_reply": False,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Candidature location - T2 17 rue du Marché Apt 2B",
+            "body": "Bonjour Mme Bertrand,\n\nMerci pour votre candidature, votre dossier est complet. Nous avons reçu plusieurs candidatures et nous reviendrons vers vous en début de semaine prochaine avec notre décision.\n\nCordialement,\nAlexandre Morel\nElron Gestion",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Fwd: Candidature location - T2 17 rue du Marché Apt 2B",
+            "body": "Sophie,\n\nJ'ai reçu 3 dossiers pour le T2 du 17 rue du Marché :\n\n1. Léa Bertrand - infirmière CHU, CDI 3 ans, 2 200€ net → dossier solide\n2. M. et Mme Charpentier - enseignants, 2x CDI, 3 800€ net → très bon\n3. M. Koné - ingénieur, CDI récent (6 mois), 2 800€ net → garant nécessaire\n\nMon avis : les Charpentier sont le meilleur profil. Tu valides ?\n\nAlexandre",
+            "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Sophie Marchand",
+            "from_email": "s.marchand@elron-gestion.fr",
+            "subject": "Re: Candidature location - T2 17 rue du Marché Apt 2B",
+            "body": "D'accord avec toi pour les Charpentier. Dossier solide, double CDI.\n\nPar contre vérifie les quittances de leur logement actuel et appelle leur propriétaire pour une référence. On fait ça proprement.\n\nSophie",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Léa Bertrand",
+            "from_email": "lea.bertrand.pro@gmail.com",
+            "subject": "Re: Candidature location - T2 17 rue du Marché Apt 2B",
+            "body": "Bonjour M. Morel,\n\nJe me permets de vous relancer pour ma candidature au T2 du 17 rue du Marché. Avez-vous pris une décision ?\n\nJe suis toujours très intéressée par cet appartement.\n\nCordialement,\nLéa Bertrand",
+            "is_reply": True,
         },
     ],
 })
 
-# === 21. RÉGULARISATION CHARGES ===
+# === 22. THREAD INBOX — Régularisation charges (3 msgs) ===
 FR_STORYLINES.append({
     "id": "regul_charges",
     "thread_subject": "Régularisation des charges 2025 - 8 avenue Foch",
     "emails": [
         {
-            "archived": False,
+            "archived": True,
             "from_name": "Julie Renard",
             "from_email": "j.renard@elron-gestion.fr",
             "subject": "Régularisation des charges 2025 - 8 avenue Foch",
             "body": "Bonjour Alexandre,\n\nJ'ai finalisé la régularisation des charges pour le 8 avenue Foch. Voici le récap :\n\n- Apt 2A (Martin) : trop-perçu de 89€, remboursement à faire\n- Apt 2B (Dupont) : complément de 156€ à appeler\n- Apt 3A (vacant) : RAS\n\nLes courriers sont prêts, tu veux les vérifier avant envoi ?\n\nJulie\n\n---\n📎 Pièce jointe : regul_charges_2025_8avFoch.xlsx (45 Ko)",
             "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Régularisation des charges 2025 - 8 avenue Foch",
+            "body": "Julie,\n\nC'est bon j'ai vérifié, tout est correct. Tu peux envoyer les courriers.\n\nPar contre préviens Mme Martin par mail pour le remboursement, elle me demandait justement des nouvelles.\n\nAlexandre",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Marc Dupont",
+            "from_email": "m.dupont.locataire@gmail.com",
+            "subject": "Re: Régularisation des charges 2025 - 8 avenue Foch",
+            "body": "Bonjour,\n\nJ'ai reçu le courrier pour la régularisation de charges. 156€ de complément c'est quand même beaucoup. Est-ce que je pourrais avoir le détail des charges svp ? Surtout le poste chauffage, je trouve que l'immeuble est mal isolé et que ça revient cher.\n\nCordialement,\nM. Dupont",
+            "is_reply": True,
+        },
+    ],
+})
+
+# === 23. LONG THREAD INBOX — Fuite d'eau 23 rue Voltaire (6 msgs) ===
+FR_STORYLINES.append({
+    "id": "fuite_voltaire_recent",
+    "thread_subject": "Fuite d'eau importante - 23 rue Voltaire parties communes",
+    "emails": [
+        {
+            "archived": True,
+            "from_name": "Nathalie Simon",
+            "from_email": "n.simon.loc@gmail.com",
+            "subject": "Fuite d'eau importante - 23 rue Voltaire parties communes",
+            "body": "BONJOUR\n\nIl y a une fuite d'eau dans le hall d'entrée du 23 rue voltaire !!! L'eau coule du plafond du hall, ça forme une flaque énorme devant les boites aux lettres.\n\nJ'ai mis des serpillières mais ça suffit pas. quelqu'un peut venir ???\n\nNathalie Simon Apt 1A",
+            "is_reply": False,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Fuite d'eau importante - 23 rue Voltaire parties communes",
+            "body": "Bonjour Mme Simon,\n\nMerci pour l'alerte. Thomas passe sur place dans l'heure et le plombier est prévenu.\n\nSi vous pouvez couper l'arrivée d'eau générale (vanne au sous-sol), ça limiterait les dégâts.\n\nAlexandre Morel",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Thomas Lefèvre",
+            "from_email": "t.lefevre@elron-gestion.fr",
+            "subject": "Re: Fuite d'eau importante - 23 rue Voltaire parties communes",
+            "body": "Alexandre,\n\nJe suis sur place. La fuite vient du raccord de la vanne palière du 2ème étage. J'ai coupé l'eau. Duplex arrive dans 30 min.\n\nIl y a de l'eau dans le hall et un peu dans la cave. Photos en PJ.\n\nThomas\n\n---\n📎 Pièce jointe : photos_fuite_voltaire_1.jpg (1.8 Mo)\n📎 Pièce jointe : photos_fuite_voltaire_2.jpg (2.1 Mo)",
+            "is_reply": True,
+        },
+        {
+            "archived": True,
+            "from_name": "Alexandre Morel",
+            "from_email": "relaylegacy@gmail.com",
+            "subject": "Re: Fuite d'eau importante - 23 rue Voltaire parties communes",
+            "body": "Reçu merci. Je préviens la SCI Les Platanes et j'ouvre un dossier assurance si nécessaire.",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Duplex Plomberie",
+            "from_email": "contact@duplex-plomberie.fr",
+            "subject": "Re: Fuite d'eau importante - 23 rue Voltaire parties communes",
+            "body": "Bonjour,\n\nIntervention terminée. Remplacement de la vanne palière du 2ème étage et du raccord défectueux.\n\nL'eau est rétablie dans tout l'immeuble.\n\nFacture en PJ.\n\nCordialement,\nDuplex Plomberie\n\n---\n📎 Pièce jointe : facture_FAC-2026-0067.pdf (92 Ko)\n📎 Pièce jointe : rapport_intervention_voltaire.pdf (134 Ko)",
+            "is_reply": True,
+        },
+        {
+            "archived": False,
+            "from_name": "Nathalie Simon",
+            "from_email": "n.simon.loc@gmail.com",
+            "subject": "Re: Fuite d'eau importante - 23 rue Voltaire parties communes",
+            "body": "merci pour la rapidité. par contre il y a encore des traces d'eau dans le hall et ça sent l'humidité. est ce que quelqu'un va nettoyer ?\n\nnathalie simon",
+            "is_reply": True,
         },
     ],
 })
@@ -797,7 +1069,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Demande autorisation animal de compagnie - Apt 1B 15 rue des Lilas",
             "body": "Bonjour Madame Bouzid,\n\nJ'ai vérifié votre bail. Il ne comporte pas de clause d'interdiction des animaux de compagnie (la loi du 9 juillet 1970 interdit d'ailleurs ce type de clause pour les animaux domestiques courants).\n\nVous pouvez donc adopter un chat sans problème, à condition qu'il ne cause pas de nuisances aux autres occupants.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -829,7 +1101,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Travaux bruyants voisin - 42 bd Gambetta Apt 3A",
             "body": "Bonjour M. Bernard,\n\nJ'ai bien pris note de votre plainte. L'appartement au-dessus du vôtre n'est pas géré par notre agence, mais j'ai contacté le syndic (Cabinet Gérard & Associés) pour signaler le problème.\n\nLe règlement de copropriété limite effectivement les travaux bruyants aux jours ouvrables de 8h à 19h et le samedi de 9h à 12h. Les travaux après 21h ne sont pas autorisés.\n\nLe syndic va envoyer un rappel au propriétaire concerné.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -853,7 +1125,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Remboursement dépôt de garantie - A. Rodriguez",
             "body": "Bonjour M. Rodriguez,\n\nVoici le décompte de restitution de votre dépôt de garantie :\n\nDépôt versé : 650,00 €\n\nRetenues justifiées :\n- Rebouchage trous murs (x8) : 80,00 €\n- Remplacement plan de travail cuisine (brûlure) : 150,00 €\n- Nettoyage complet logement : 120,00 €\n\nTotal retenues : 350,00 €\nMontant à rembourser : 300,00 €\n\nLe virement sera effectué sous 10 jours ouvrés. Les justificatifs sont joints.\n\nCordialement,\nAlexandre Morel\n\n---\n📎 Pièce jointe : decompte_restitution_rodriguez.pdf (89 Ko)\n📎 Pièce jointe : factures_retenues_rodriguez.pdf (234 Ko)",
             "is_reply": True,
@@ -917,7 +1189,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Relance assurance habitation - N. Roux, 17 rue du Marché",
             "body": "Bonjour M. Roux,\n\nNous constatons que votre attestation d'assurance habitation a expiré le 30 novembre 2025. Or, en application de l'article 7g de la loi du 6 juillet 1989, tout locataire est tenu de justifier d'une assurance couvrant les risques locatifs.\n\nMerci de nous transmettre votre nouvelle attestation dans les meilleurs délais.\n\nÀ défaut de réponse sous 30 jours, nous serions contraints d'engager une procédure de résiliation de bail.\n\nCordialement,\nAlexandre Morel\nElron Gestion Immobilière",
             "is_reply": False,
@@ -1013,7 +1285,7 @@ FR_STORYLINES.append({
         {
             "archived": True,
             "from_name": "Alexandre Morel",
-            "from_email": "a.morel@elron-gestion.fr",
+            "from_email": "relaylegacy@gmail.com",
             "subject": "Re: Odeurs de cuisine insupportables - 8 av Foch Apt 2A",
             "body": "Bonjour Mme Martin,\n\nJ'ai bien noté votre plainte. Le problème vient probablement de la VMC qui mélange les flux des différents appartements. C'est un défaut courant dans les immeubles de cette époque.\n\nJe vais :\n1. Faire vérifier le système de VMC par un professionnel\n2. Envoyer un courrier de rappel au locataire concerné sur les usages (hotte aspirante, aération)\n\nEn attendant, je vous conseille de vérifier que vos bouches d'aération ne sont pas obstruées.\n\nCordialement,\nAlexandre Morel",
             "is_reply": True,
@@ -1162,7 +1434,7 @@ FR_STANDALONE_ARCHIVED = [
     },
     {
         "from_name": "Alexandre Morel",
-        "from_email": "a.morel@elron-gestion.fr",
+        "from_email": "relaylegacy@gmail.com",
         "subject": "Visite appart vacant 17 rue du Marché",
         "body": "Nadia,\n\nJ'ai 3 visites programmées pour le T2 au 17 rue du Marché (apt 2B, celui de Roux qui part fin janvier) :\n- Samedi 10h : Mme Bertrand (infirmière CHU)\n- Samedi 11h : M. et Mme Charpentier (enseignants)\n- Samedi 14h : M. Koné (ingénieur)\n\nTu peux me préparer les clés et les fiches de visite stp ?\n\nAlexandre",
     },
@@ -1300,7 +1572,7 @@ FR_STANDALONE_ARCHIVED = [
     },
     {
         "from_name": "Alexandre Morel",
-        "from_email": "a.morel@elron-gestion.fr",
+        "from_email": "relaylegacy@gmail.com",
         "subject": "EDL Rodriguez - retenue sur caution",
         "body": "Sophie,\n\nSuite à l'état des lieux de sortie de M. Rodriguez (5 impasse des Acacias), voici les retenues que je propose :\n\n- Trous non rebouchés dans les murs : 80€\n- Tache de brûlure plan de travail cuisine : 150€\n- Nettoyage insuffisant : 120€\n\nTotal retenues : 350€ sur 650€ de caution\nRemboursement : 300€\n\nTu valides ?\n\nAlexandre\n\n---\n📎 Pièce jointe : EDL_sortie_rodriguez_photos.pdf (2.3 Mo)",
     },
@@ -1417,7 +1689,7 @@ FR_STANDALONE_ARCHIVED = [
     },
     {
         "from_name": "Alexandre Morel",
-        "from_email": "a.morel@elron-gestion.fr",
+        "from_email": "relaylegacy@gmail.com",
         "subject": "Absence vendredi après-midi",
         "body": "Salut Thomas,\n\nJe serai absent vendredi aprèm (RDV médical). Nadia prend le relais sur les urgences.\n\nSi le propriétaire Blanchard rappelle pour le diagnostic, dis-lui que c'est en cours.\n\nAlexandre",
     },
@@ -1579,7 +1851,7 @@ FR_STANDALONE_ARCHIVED = [
     },
     {
         "from_name": "Alexandre Morel",
-        "from_email": "a.morel@elron-gestion.fr",
+        "from_email": "relaylegacy@gmail.com",
         "subject": "Re: Planning visites janvier - Toulouse",
         "body": "Bonjour,\n\nSuite aux 3 visites de samedi, voici mon retour :\n\n- Mme Bertrand : très intéressée, dossier complet déjà déposé\n- M. et Mme Charpentier : intéressés mais veulent revoir le loyer à la baisse (750 → 700€)\n- M. Koné : a trouvé autre chose, ne donne pas suite\n\nJe recommande Mme Bertrand. On valide ?\n\nAlexandre",
     },
@@ -1659,7 +1931,7 @@ FR_STANDALONE_INBOX = [
     },
     {
         "from_name": "Alexandre Morel",
-        "from_email": "a.morel@elron-gestion.fr",
+        "from_email": "relaylegacy@gmail.com",
         "subject": "Candidatures appart Roux - 3 dossiers reçus",
         "body": "Sophie,\n\nJ'ai reçu 3 dossiers pour le T2 du 17 rue du Marché :\n\n1. Léa Bertrand - infirmière CHU, CDI, 2 200€ net → dossier solide\n2. M. et Mme Charpentier - enseignants, 2x CDI, 3 800€ net → très bon\n3. M. Koné - ingénieur, CDI récent (6 mois), 2 800€ net → correct mais garant nécessaire\n\nMon avis : les Charpentier sont le meilleur profil. Mme Bertrand est très bien aussi.\n\nTu veux qu'on en discute ou je peux avancer ?\n\nAlexandre",
     },
@@ -1762,7 +2034,7 @@ FR_STANDALONE_INBOX = [
     {
         "from_name": "Thomas Lefèvre",
         "from_email": "t.lefevre@elron-gestion.fr",
-        "subject": "URGENT - Fuite colonne montante 15 rue des Lilas",
+        "subject": "Fuite colonne montante 15 rue des Lilas",
         "body": "Sophie, Alexandre,\n\nGros problème : Mme Lambert vient d'appeler, il y a une fuite importante sur la colonne montante entre le 3ème et le 4ème étage au 15 rue des Lilas. De l'eau coule dans le couloir.\n\nJ'ai appelé Duplex Plomberie en urgence, ils arrivent dans 1h. J'ai demandé au gardien de couper l'eau en attendant.\n\nJe file sur place.\n\nThomas",
     },
     {
@@ -1806,7 +2078,7 @@ FR_STANDALONE_INBOX = [
     # --- Emails divers / références à threads ---
     {
         "from_name": "Alexandre Morel",
-        "from_email": "a.morel@elron-gestion.fr",
+        "from_email": "relaylegacy@gmail.com",
         "subject": "Re: Contestation plan de travail Rodriguez",
         "body": "Sophie,\n\nRodriguez conteste la retenue de 150€ pour le plan de travail (brûlure). J'ai vérifié l'EDL d'entrée : effectivement rien n'est mentionné, mais la photo d'entrée est floue sur cette zone.\n\nDans le doute, je propose de réduire à 75€ pour éviter un conflit. Ça porte le remboursement à 375€. Ton avis ?\n\nAlexandre",
     },
@@ -1873,7 +2145,7 @@ _FR_MAINT_SUBJECTS = [
     "Problème {issue} - {addr}",
     "{issue} à signaler - {addr}",
     "Signalement {issue}",
-    "Urgent : {issue} - {addr}",
+    "Signalement : {issue} - {addr}",
 ]
 
 _FR_MAINT_ISSUES = [

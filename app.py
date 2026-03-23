@@ -7,7 +7,8 @@ import time
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.utils import formatdate
+from email.header import Header
+from email.utils import formataddr, formatdate
 
 from flask import Flask, jsonify, redirect, render_template_string, request, session
 
@@ -156,9 +157,9 @@ def build_raw_message(from_name: str, from_email: str, subject: str,
                       fake_date: datetime = None) -> str:
     """Build a base64url-encoded RFC 2822 message."""
     msg = MIMEMultipart("alternative")
-    msg["From"] = f"{from_name} <{from_email}>"
+    msg["From"] = formataddr((str(Header(from_name, "utf-8")), from_email))
     msg["To"] = to_email
-    msg["Subject"] = subject
+    msg["Subject"] = str(Header(subject, "utf-8"))
     if fake_date:
         msg["Date"] = formatdate(timeval=fake_date.timestamp(), localtime=False, usegmt=True)
     else:
