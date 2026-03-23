@@ -19,6 +19,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from storylines import get_emails_for_batch
+from storylines_fr_full import get_fr_full_emails
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(32))
@@ -26,7 +27,7 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(32))
 SCOPES = ["https://mail.google.com/"]
 CREDENTIALS_FILE = "credentials.json"
 
-VALID_BATCHES = ["history", "day1", "day2", "day3", "day4", "day_fr", "month1", "month2"]
+VALID_BATCHES = ["history", "day1", "day2", "day3", "day4", "day_fr", "month1", "month2", "fr_full"]
 
 # Fixed date ranges for each batch (all dates in 2026).
 # Each value is (start_date, end_date) — emails are spread across this range.
@@ -39,6 +40,7 @@ BATCH_DATE_RANGES = {
     "day_fr":  (datetime(2026, 1, 20, tzinfo=timezone.utc), datetime(2026, 1, 20, 23, 59, tzinfo=timezone.utc)),
     "month1":  (datetime(2026, 1, 20, tzinfo=timezone.utc), datetime(2026, 2, 1, 23, 59, tzinfo=timezone.utc)),
     "month2":  None,  # special: Feb 1 → today
+    "fr_full": None,  # special: Oct 1 2025 → today (300 emails)
 }
 
 # Batches that should be injected as already-read
@@ -53,6 +55,7 @@ BATCH_INFO = {
     "day_fr":  {"label": "Jour 1 (FR)", "desc": "20 janv. — 50 mails en français", "icon": "&#127467;&#127479;", "color": "#0369a1"},
     "month1":  {"label": "Month 1", "desc": "Jan 20 – Feb 1", "icon": "&#128197;", "color": "#d97706"},
     "month2":  {"label": "Month 2", "desc": "Feb 1 – today", "icon": "&#128197;", "color": "#dc2626"},
+    "fr_full": {"label": "Simulation FR", "desc": "300 emails FR — 50 inbox + 250 archivés", "icon": "&#127467;&#127479;", "color": "#1d4ed8"},
 }
 
 # ---------------------------------------------------------------------------
@@ -209,7 +212,13 @@ def inject_batch(batch):
 
     try:
         user_email = session.get("user_email") or "me"
-        emails = get_emails_for_batch(batch)
+
+        # fr_full uses its own data source
+        if batch == "fr_full":
+            emails = get_fr_full_emails()
+        else:
+            emails = get_emails_for_batch(batch)
+
         injected = 0
         errors = []
 
@@ -217,8 +226,12 @@ def inject_batch(batch):
         now = datetime.now(timezone.utc)
         date_range = BATCH_DATE_RANGES.get(batch)
         if date_range is None:
-            # month2: Feb 1 → today
-            range_start = datetime(2026, 2, 1, tzinfo=timezone.utc)
+            if batch == "fr_full":
+                # fr_full: Oct 1 2025 → today (300 emails over ~5 months)
+                range_start = datetime(2025, 10, 1, tzinfo=timezone.utc)
+            else:
+                # month2: Feb 1 → today
+                range_start = datetime(2026, 2, 1, tzinfo=timezone.utc)
             range_end = now
         else:
             range_start, range_end = date_range
@@ -253,7 +266,14 @@ def inject_batch(batch):
             # Threading: determine if this email should join an existing thread
             thread_subject = email_data.get("thread_subject")
             is_reply = email_data.get("is_reply", False)
-            labels = ["INBOX"] if is_read_batch else ["INBOX", "UNREAD"]
+            # Determine labels: archived emails get no INBOX label
+            is_archived = email_data.get("archived", False)
+            if is_archived:
+                labels = []  # No INBOX, no UNREAD = archived and read
+            elif is_read_batch:
+                labels = ["INBOX"]  # In inbox but read
+            else:
+                labels = ["INBOX", "UNREAD"]  # In inbox, unread
             insert_body = {"labelIds": labels, "raw": raw}
 
             if thread_subject and is_reply:
@@ -300,13 +320,20 @@ def reset_inbox():
     except PermissionError:
         return jsonify({"success": False, "auth_required": True}), 401
 
+    scope = request.args.get("scope", "inbox")  # "inbox" or "all"
+
     try:
         deleted = 0
         page_token = None
         message_ids = []
 
         while True:
-            params = {"userId": "me", "labelIds": ["INBOX"], "maxResults": 500}
+            if scope == "all":
+                # Delete ALL emails (inbox + archived) — for full simulation reset
+                params = {"userId": "me", "maxResults": 500}
+            else:
+                # Default: only delete INBOX emails
+                params = {"userId": "me", "labelIds": ["INBOX"], "maxResults": 500}
             if page_token:
                 params["pageToken"] = page_token
             result = service.users().messages().list(**params).execute()
@@ -317,7 +344,8 @@ def reset_inbox():
                 break
 
         if not message_ids:
-            return jsonify({"success": True, "deleted": 0, "message": "Inbox already empty."})
+            msg = "Mailbox already empty." if scope == "all" else "Inbox already empty."
+            return jsonify({"success": True, "deleted": 0, "message": msg})
 
         chunk_size = 1000
         for i in range(0, len(message_ids), chunk_size):
@@ -327,10 +355,11 @@ def reset_inbox():
             ).execute()
             deleted += len(chunk)
 
+        msg = f"Supprimé {deleted} emails (inbox + archives)." if scope == "all" else f"Deleted {deleted} messages. Inbox is now empty."
         return jsonify({
             "success": True,
             "deleted": deleted,
-            "message": f"Deleted {deleted} messages. Inbox is now empty.",
+            "message": msg,
         })
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
@@ -602,6 +631,27 @@ HTML_DASHBOARD = """
     <div class="arrow">&rarr;</div>
     {% endif %}
     {% endfor %}
+  </div>
+
+  <div class="sequence-label" style="margin-top: 1.5rem;">Simulation complète FR &#127467;&#127479;</div>
+
+  <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; max-width: 600px;">
+    <div class="batch-card" style="width: 220px;">
+      <div class="batch-icon">&#127467;&#127479;</div>
+      <div class="batch-title">Simulation FR complète</div>
+      <div class="batch-desc">~300 emails en français<br>50 en inbox + 250 archivés<br>Threads, PJ simulées, multi-types</div>
+      <button class="btn-inject" style="background: linear-gradient(135deg, #1d4ed8, #7c3aed);" onclick="runAction('/inject/fr_full', this)">
+        Injecter 300 emails
+      </button>
+    </div>
+    <div class="batch-card" style="width: 180px;">
+      <div class="batch-icon">&#128465;&#65039;</div>
+      <div class="batch-title">Reset complet</div>
+      <div class="batch-desc">Supprime TOUS les emails<br>(inbox + archives)</div>
+      <button class="btn-reset" onclick="runAction('/reset?scope=all', this)">
+        Reset tout
+      </button>
+    </div>
   </div>
 
   <div class="reset-section">
