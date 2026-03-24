@@ -7,6 +7,8 @@ import time
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 from email.header import Header
 from email.utils import formataddr, formatdate
 
@@ -152,11 +154,79 @@ def signout():
 # Email building & threading helpers
 # ---------------------------------------------------------------------------
 
+def _parse_attachment_lines(body: str) -> tuple:
+    """Extract attachment filenames from 📎 lines in body text.
+
+    Returns (clean_body, list_of_filenames).
+    """
+    import re
+    lines = body.split("\n")
+    clean_lines = []
+    filenames = []
+    skip_separator = False
+
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith("📎"):
+            # Extract filename: "📎 Pièce jointe : some_file.pdf (123 Ko)"
+            match = re.search(r":\s*(.+?\.\w+)", stripped)
+            if match:
+                filenames.append(match.group(1).strip())
+            continue
+        # Skip "---" separator that precedes attachment lines
+        if stripped == "---":
+            # Check if next non-empty lines are all 📎
+            remaining = [l.strip() for l in lines[i+1:] if l.strip()]
+            if remaining and all(l.startswith("📎") for l in remaining):
+                continue
+        clean_lines.append(line)
+
+    clean_body = "\n".join(clean_lines).rstrip()
+    return clean_body, filenames
+
+
+def _guess_attachment_type(filename: str) -> str:
+    """Guess the generator type from filename extension."""
+    ext = filename.rsplit(".", 1)[-1].lower() if "." in filename else ""
+    if ext == "pdf":
+        # Guess more specific type from filename
+        fn_lower = filename.lower()
+        if "edl" in fn_lower or "etat" in fn_lower:
+            return "pdf_edl"
+        if "devis" in fn_lower or "facture" in fn_lower or "relance" in fn_lower or "mise_en_demeure" in fn_lower:
+            return "pdf_devis"
+        return "pdf_report"
+    elif ext == "xlsx":
+        return "xlsx"
+    elif ext in ("jpg", "jpeg"):
+        return "jpg"
+    elif ext == "png":
+        return "png"
+    elif ext == "zip":
+        # For .zip files (photo archives), generate a jpg instead
+        return "jpg"
+    elif ext == "mp3":
+        # For audio files, generate a small PDF placeholder
+        return "pdf_report"
+    return "pdf_report"  # fallback
+
+
 def build_raw_message(from_name: str, from_email: str, subject: str,
                       body: str, to_email: str,
-                      fake_date: datetime = None) -> str:
-    """Build a base64url-encoded RFC 2822 message."""
-    msg = MIMEMultipart("alternative")
+                      fake_date: datetime = None,
+                      attachments: list = None) -> str:
+    """Build a base64url-encoded RFC 2822 message.
+
+    Automatically detects 📎 lines in the body and generates real attachments.
+    """
+    # Auto-detect attachments from 📎 lines in body
+    clean_body, parsed_filenames = _parse_attachment_lines(body)
+    has_attachments = bool(parsed_filenames) or bool(attachments)
+
+    if has_attachments:
+        msg = MIMEMultipart("mixed")
+    else:
+        msg = MIMEMultipart("alternative")
     msg["From"] = formataddr((str(Header(from_name, "utf-8")), from_email))
     msg["To"] = to_email
     msg["Subject"] = str(Header(subject, "utf-8"))
@@ -164,7 +234,55 @@ def build_raw_message(from_name: str, from_email: str, subject: str,
         msg["Date"] = formatdate(timeval=fake_date.timestamp(), localtime=False, usegmt=True)
     else:
         msg["Date"] = formatdate(localtime=True)
-    msg.attach(MIMEText(body, "plain"))
+
+    msg.attach(MIMEText(clean_body if has_attachments else body, "plain"))
+
+    # Generate and attach real files
+    if has_attachments:
+        from attachment_generator import generate_attachment
+
+        # Auto-generated from 📎 lines
+        for fname in parsed_filenames:
+            att_type = _guess_attachment_type(fname)
+            # Use subject and from_name as context for content generation
+            kwargs = {
+                "title": subject,
+                "company": from_name,
+                "label": fname.rsplit(".", 1)[0].replace("_", " "),
+            }
+            try:
+                real_fname = fname
+                # Replace .zip with .jpg for photo archives
+                if fname.lower().endswith(".zip"):
+                    real_fname = fname.rsplit(".", 1)[0] + ".jpg"
+                if fname.lower().endswith(".mp3"):
+                    real_fname = fname.rsplit(".", 1)[0] + ".pdf"
+
+                _, mime_type, file_data = generate_attachment(att_type, real_fname, **kwargs)
+                maintype, subtype = mime_type.split("/", 1)
+                part = MIMEBase(maintype, subtype)
+                part.set_payload(file_data)
+                encoders.encode_base64(part)
+                part.add_header("Content-Disposition", "attachment", filename=real_fname)
+                msg.attach(part)
+            except Exception:
+                pass  # Skip on error
+
+        # Explicitly provided attachments (override)
+        if attachments:
+            for att in attachments:
+                try:
+                    _, mime_type, file_data = generate_attachment(
+                        att["type"], att["filename"], **att.get("kwargs", {}))
+                    maintype, subtype = mime_type.split("/", 1)
+                    part = MIMEBase(maintype, subtype)
+                    part.set_payload(file_data)
+                    encoders.encode_base64(part)
+                    part.add_header("Content-Disposition", "attachment", filename=att["filename"])
+                    msg.attach(part)
+                except Exception:
+                    pass
+
     raw = base64.urlsafe_b64encode(msg.as_bytes()).decode("utf-8")
     return raw
 
@@ -262,6 +380,7 @@ def inject_batch(batch):
                 body=email_data["body"],
                 to_email=user_email,
                 fake_date=fake_dt,
+                attachments=email_data.get("attachments"),
             )
 
             # Threading: determine if this email should join an existing thread
