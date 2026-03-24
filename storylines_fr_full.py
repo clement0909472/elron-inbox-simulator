@@ -1875,12 +1875,6 @@ FR_STANDALONE_ARCHIVED = [
 FR_STANDALONE_INBOX = [
     # --- Nouvelles demandes locataires ---
     {
-        "from_name": "Isabelle Martin",
-        "from_email": "i.martin.locataire@gmail.com",
-        "subject": "Fuite sous évier salle de bain - 8 av Foch Apt 2A",
-        "body": "Re bonjour,\n\nDécidément c'est pas ma période... Après le dégât des eaux, j'ai maintenant une fuite sous l'évier de la salle de bain. Le siphon a l'air fendu.\n\nC'est pas urgent urgent (je mets une bassine) mais faudrait quand même que quelqu'un passe.\n\nMerci\nI. Martin",
-    },
-    {
         "from_name": "Fatima Bouzid",
         "from_email": "f.bouzid.loc@gmail.com",
         "subject": "Moisissure derrière meuble cuisine",
@@ -1973,12 +1967,6 @@ FR_STANDALONE_INBOX = [
         "from_email": "pro@seloger.com",
         "subject": "Boostez vos annonces avec SeLoger Premium !",
         "body": "Bonjour,\n\nVos annonces ne performent pas assez ? Passez à SeLoger Premium :\n\n→ Visibilité x3 sur SeLoger et Logic-Immo\n→ Photos HD illimitées\n→ Statistiques détaillées\n→ Badge \"Professionnel vérifié\"\n\nOffre spéciale : -20% le 1er trimestre\n\nContactez votre conseiller : 01 XX XX XX XX\n\n---\nSe désinscrire",
-    },
-    {
-        "from_name": "Veolia Eau",
-        "from_email": "factures@veolia.fr",
-        "subject": "Facture eau T4 2025 - Résidence Les Tilleuls",
-        "body": "Bonjour,\n\nVotre facture d'eau pour le 4ème trimestre 2025 est disponible.\n\nMontant : 1 234,56 €\nÉchéance : 15 février 2026\nRéf. contrat : VE-93-2025-04521\n\nRetrouvez votre facture dans votre espace client.\n\nCordialement,\nVeolia Eau\n\n---\n📎 Pièce jointe : facture_veolia_T4_2025.pdf (78 Ko)",
     },
     # --- Divers récents ---
     {
@@ -2106,6 +2094,114 @@ FR_STANDALONE_INBOX = [
         "from_email": "rdv@dpe-express.fr",
         "subject": "Résultat DPE - 5 impasse des Acacias Apt 1C",
         "body": "Bonjour,\n\nSuite au diagnostic du 3 janvier, voici les résultats du DPE pour le logement au 5 impasse des Acacias, Apt 1C :\n\nClasse énergie : D (198 kWh/m²/an)\nClasse climat : D (34 kg CO2/m²/an)\n\nLe logement est conforme aux obligations de location.\n\nRapport complet en pièce jointe.\n\nCordialement,\nDPE Express\n\n---\n📎 Pièce jointe : DPE_5acacias_1C.pdf (1.2 Mo)",
+    },
+]
+
+# ---------------------------------------------------------------------------
+# RECENT INBOX THREADS — "Reçus aujourd'hui" (6 threads, 2-4 msgs chacun)
+# Aucune réponse de relaylegacy@gmail.com
+# ---------------------------------------------------------------------------
+
+# Thread récent 1 : Locataire signale fuite + prestataire propose créneau (2 msgs)
+FR_STORYLINES.append({
+    "id": "recent_fuite_cuisine_nguyen",
+    "thread_subject": "Fuite robinet cuisine - 23 rue Voltaire Apt 2C",
+    "emails": [
+        {
+            "archived": False,
+            "from_name": "Tran Nguyen",
+            "from_email": "t.nguyen.loc@gmail.com",
+            "subject": "Fuite robinet cuisine - 23 rue Voltaire Apt 2C",
+            "body": "Bonjour,\n\nLe robinet de la cuisine fuit en continu depuis hier soir. J'ai fermé l'arrivée d'eau sous l'évier mais du coup on n'a plus d'eau à la cuisine.\n\nPouvez-vous envoyer quelqu'un rapidement svp ?\n\nMerci,\nT. Nguyen\nApt 2C",
+            "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Duplex Plomberie",
+            "from_email": "contact@duplex-plomberie.fr",
+            "subject": "Re: Fuite robinet cuisine - 23 rue Voltaire Apt 2C",
+            "body": "Bonjour M. Morel,\n\nSuite à votre appel, on peut passer demain matin entre 9h et 10h pour le robinet au 23 rue Voltaire.\n\nMerci de confirmer que le locataire sera présent.\n\nCordialement,\nDuplex Plomberie",
+            "is_reply": True,
+        },
+    ],
+})
+
+# Thread récent 2 : Proprio qui relance (2 msgs)
+FR_STORYLINES.append({
+    "id": "recent_relance_proprio_blanchard",
+    "thread_subject": "Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
+    "emails": [
+        {
+            "archived": False,
+            "from_name": "SCI Clos Fleuri Invest",
+            "from_email": "gestion@closfleuri-invest.fr",
+            "subject": "Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
+            "body": "Mme Marchand,\n\nNous n'avons eu aucun retour sur l'avancement des travaux de réfection de la toiture votés en AG. Le couvreur devait commencer en février.\n\nMerci de nous faire un point.\n\nCordialement,\nSCI Clos Fleuri Invest",
+            "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Cabinet Gérard & Associés",
+            "from_email": "syndic@gerard-associes.fr",
+            "subject": "Re: Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
+            "body": "Bonjour Mme Marchand,\n\nLe couvreur (Ets Laroche) nous a informés d'un retard de livraison des tuiles. Report prévu à mi-mars. Il y a des infiltrations au dernier étage, ça devient prioritaire.\n\nJe vous transmets le nouveau planning dès réception.\n\nCordialement,\nLe Syndic",
+            "is_reply": True,
+        },
+    ],
+})
+
+# Thread récent 3 : Thread interne avec multi-PJ (2 msgs, 2+ PJ par msg)
+FR_STORYLINES.append({
+    "id": "recent_edl_sortie_rodriguez",
+    "thread_subject": "EDL sortie Rodriguez - 5 impasse des Acacias Apt 1C",
+    "emails": [
+        {
+            "archived": False,
+            "from_name": "Thomas Lefèvre",
+            "from_email": "t.lefevre@elron-gestion.fr",
+            "subject": "EDL sortie Rodriguez - 5 impasse des Acacias Apt 1C",
+            "body": "Bonjour,\n\nJ'ai fait l'état des lieux de sortie ce matin. Quelques dégradations à noter :\n\n- Plan de travail cuisine : brûlure de cigarette (photo 1)\n- Mur salon : trous non rebouchés x4 (photo 2)\n- Moquette chambre : tache importante (photo 3)\n- Salle de bain : joint silicone noirci (photo 4)\n\nLe reste est correct. Compteur eau relevé à 1247 m³.\n\nPhotos et grille EDL en PJ.\n\nThomas\n\n---\n📎 Pièce jointe : EDL_sortie_Rodriguez_5acacias_1C.pdf (2.1 Mo)\n📎 Pièce jointe : photos_EDL_cuisine_salon.zip (4.8 Mo)\n📎 Pièce jointe : photos_EDL_chambre_sdb.zip (3.2 Mo)",
+            "is_reply": False,
+        },
+        {
+            "archived": False,
+            "from_name": "Sophie Marchand",
+            "from_email": "s.marchand@elron-gestion.fr",
+            "subject": "Re: EDL sortie Rodriguez - 5 impasse des Acacias Apt 1C",
+            "body": "Merci Thomas.\n\nJ'ai comparé avec l'EDL d'entrée. Voici ma proposition de retenues sur le dépôt de garantie (540€) :\n\n- Plan de travail brûlé : 150€\n- Rebouchage trous : 40€\n- Nettoyage moquette : 80€\n- Remplacement joint silicone : 30€\n\nTotal retenues : 300€\nRemboursement : 240€\n\nAlexandre, tu valides ? Je joins l'EDL d'entrée et le comparatif. Rodriguez conteste la retenue plan de travail, il dit que c'était déjà comme ça à l'entrée. La photo d'entrée est floue sur cette zone.\n\nSophie\n\n---\n📎 Pièce jointe : EDL_entree_Rodriguez_2023.pdf (1.8 Mo)\n📎 Pièce jointe : comparatif_EDL_entree_sortie.xlsx (45 Ko)",
+            "is_reply": True,
+        },
+    ],
+})
+
+
+# ---------------------------------------------------------------------------
+# RECENT INBOX SOLO — 4 emails solo "reçus aujourd'hui" sans réponse user
+# ---------------------------------------------------------------------------
+FR_RECENT_INBOX_SOLO = [
+    {
+        "from_name": "Isabelle Martin",
+        "from_email": "i.martin.locataire@gmail.com",
+        "subject": "Fuite sous évier salle de bain - 8 av Foch Apt 2A",
+        "body": "Re bonjour,\n\nDécidément c'est pas ma période... Après le dégât des eaux, j'ai maintenant une fuite sous l'évier de la salle de bain. Le siphon a l'air fendu.\n\nC'est pas urgent urgent (je mets une bassine) mais faudrait quand même que quelqu'un passe.\n\nMerci\nI. Martin",
+    },
+    {
+        "from_name": "Thomas Lefèvre",
+        "from_email": "t.lefevre@elron-gestion.fr",
+        "subject": "Rappel : réunion équipe lundi 9h",
+        "body": "Salut à tous,\n\nJuste un rappel pour la réunion de lundi matin. On se retrouve au bureau à 9h. Ordre du jour envoyé par Sophie vendredi.\n\nBon week-end,\nThomas",
+    },
+    {
+        "from_name": "Amina Diallo",
+        "from_email": "a.diallo.loc@gmail.com",
+        "subject": "VMC très bruyante depuis ce matin",
+        "body": "bonjour\n\nla vmc fait un bruit horrible depuis ce matin, on dirait qu'il y a quelque chose de coincé dedans. c'est vraiment très fort, on s'entend plus parler.\n\npouvez vous envoyer quelqu'un svp ?\n\nmerci\namina diallo\napt 3A rés les tilleuls",
+    },
+    {
+        "from_name": "Veolia Eau",
+        "from_email": "factures@veolia.fr",
+        "subject": "Facture eau T1 2026 - Résidence Les Tilleuls",
+        "body": "Bonjour,\n\nVotre facture d'eau pour le 1er trimestre 2026 est disponible.\n\nMontant : 1 089,34 €\nÉchéance : 15 avril 2026\nRéf. contrat : VE-93-2025-04521\n\nRetrouvez votre facture dans votre espace client.\n\nCordialement,\nVeolia Eau\n\n---\n📎 Pièce jointe : facture_veolia_T1_2026.pdf (78 Ko)",
     },
 ]
 
@@ -2271,12 +2367,20 @@ def _generate_fr_filler(count: int, section: str) -> list:
 # Main function: return all ~300 emails ordered (archived first, inbox last)
 # ---------------------------------------------------------------------------
 def get_fr_full_emails() -> list:
-    """Return ~300 French emails: first 270 archived, last 30 inbox."""
+    """Return ~300 French emails: first 270 archived, last 30 inbox.
+
+    Inbox is split into two ordered blocks:
+      - Positions 0-19: "older" inbox with user replies (threads where relaylegacy responded)
+      - Positions 20-29: "today" inbox — 4 solo + 6 threads, no relaylegacy response, some with PJ
+    This ordering means the last 10 items (most recent dates) are "today's" emails.
+    """
     archived = []
-    inbox = []
+    inbox_older = []   # Inbox emails with user (relaylegacy) responses
+    inbox_recent = []  # Inbox emails received "today" — no user response
 
     # Collect storyline emails
     for storyline in FR_STORYLINES:
+        is_recent = storyline["id"].startswith("recent_")
         for email in storyline["emails"]:
             entry = {
                 **email,
@@ -2286,8 +2390,10 @@ def get_fr_full_emails() -> list:
             }
             if email.get("archived", True):
                 archived.append(entry)
+            elif is_recent:
+                inbox_recent.append(entry)
             else:
-                inbox.append(entry)
+                inbox_older.append(entry)
 
     # Collect standalone archived
     for email in FR_STANDALONE_ARCHIVED:
@@ -2299,9 +2405,9 @@ def get_fr_full_emails() -> list:
             "is_reply": False,
         })
 
-    # Collect standalone inbox
+    # Collect standalone inbox (older — with user replies)
     for email in FR_STANDALONE_INBOX:
-        inbox.append({
+        inbox_older.append({
             **email,
             "archived": False,
             "storyline_id": None,
@@ -2309,7 +2415,17 @@ def get_fr_full_emails() -> list:
             "is_reply": False,
         })
 
-    # Pad with filler to reach targets
+    # Collect recent solo inbox emails
+    for email in FR_RECENT_INBOX_SOLO:
+        inbox_recent.append({
+            **email,
+            "archived": False,
+            "storyline_id": None,
+            "thread_subject": None,
+            "is_reply": False,
+        })
+
+    # Pad archived with filler to reach target
     archived_target = 270
     inbox_target = 30
 
@@ -2323,6 +2439,10 @@ def get_fr_full_emails() -> list:
                 "is_reply": False,
             })
 
+    # Build final inbox: older first (positions 0-19), then recent (positions 20-29)
+    inbox = inbox_older[:20] + inbox_recent
+
+    # If we still need more inbox, pad with filler
     if len(inbox) < inbox_target:
         filler = _generate_fr_filler(inbox_target - len(inbox), "inbox")
         for f in filler:
