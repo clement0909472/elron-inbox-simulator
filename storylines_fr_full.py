@@ -2100,59 +2100,114 @@ FR_STANDALONE_INBOX = [
 # ---------------------------------------------------------------------------
 # RECENT INBOX THREADS — "Reçus aujourd'hui" (6 threads, 2-4 msgs chacun)
 # Aucune réponse de relaylegacy@gmail.com
+#
+# PAIRES LIÉES : certains threads portent sur le MÊME lot/ticket mais sont
+# dans des threads séparés (locataire vs prestataire, interne vs externe).
+# L'agent doit détecter qu'ils doivent être regroupés dans le même ticket.
 # ---------------------------------------------------------------------------
 
-# Thread récent 1 : Locataire signale fuite + prestataire propose créneau (2 msgs)
+# === PAIRE 1 : Serrure cassée — 15 rue des Lilas Apt 2A ===
+# Thread A : Le locataire signale la serrure cassée
 FR_STORYLINES.append({
-    "id": "recent_fuite_cuisine_nguyen",
-    "thread_subject": "Fuite robinet cuisine - 23 rue Voltaire Apt 2C",
+    "id": "recent_serrure_khelif_locataire",
+    "thread_subject": "Serrure porte entrée cassée - 15 rue des Lilas Apt 2A",
     "emails": [
         {
             "archived": False,
-            "from_name": "Tran Nguyen",
-            "from_email": "t.nguyen.loc@gmail.com",
-            "subject": "Fuite robinet cuisine - 23 rue Voltaire Apt 2C",
-            "body": "Bonjour,\n\nLe robinet de la cuisine fuit en continu depuis hier soir. J'ai fermé l'arrivée d'eau sous l'évier mais du coup on n'a plus d'eau à la cuisine.\n\nPouvez-vous envoyer quelqu'un rapidement svp ?\n\nMerci,\nT. Nguyen\nApt 2C",
+            "from_name": "Sonia Khelif",
+            "from_email": "s.khelif.loc@gmail.com",
+            "subject": "Serrure porte entrée cassée - 15 rue des Lilas Apt 2A",
+            "body": "Bonjour,\n\nMa serrure de porte d'entrée est cassée depuis hier soir, la clé tourne dans le vide et je n'arrive plus à fermer à clé. J'ai peur de laisser l'appart ouvert la nuit. Le cylindre a l'air complètement mort, la clé ne rentre même plus correctement.\n\nPouvez-vous envoyer un serrurier en urgence svp ?\n\nMerci,\nSonia Khelif\nApt 2A, 15 rue des Lilas\n\n---\n📎 Pièce jointe : photo_serrure_cassee.jpg (1.2 Mo)",
             "is_reply": False,
         },
+    ],
+})
+
+# Thread B : Le serrurier répond sur un thread séparé (contacté par le gestionnaire)
+FR_STORYLINES.append({
+    "id": "recent_serrure_khelif_serrurier",
+    "thread_subject": "Intervention serrure 15 rue des Lilas Apt 2A",
+    "emails": [
+        {
+            "archived": False,
+            "from_name": "Serrurerie Rapide 93",
+            "from_email": "contact@serrurerie-rapide93.fr",
+            "subject": "Intervention serrure 15 rue des Lilas Apt 2A",
+            "body": "Bonjour M. Morel,\n\nSuite à votre appel, je peux passer cet après-midi entre 14h et 15h pour le changement de cylindre au 15 rue des Lilas, Apt 2A.\n\nSi c'est un cylindre européen standard, comptez environ 120€ TTC (fourniture + pose). Si le barillet est blindé, ça peut monter à 180€.\n\nMerci de confirmer.\n\nCordialement,\nM. Benali\nSerrurerie Rapide 93",
+            "is_reply": False,
+        },
+    ],
+})
+
+# === PAIRE 2 : Fuite plafond SDB — Rés. Les Tilleuls Apt 3A ===
+# Thread A : La locataire signale une fuite au plafond (avec photo)
+FR_STORYLINES.append({
+    "id": "recent_fuite_plafond_diallo_locataire",
+    "thread_subject": "Fuite plafond salle de bain - Rés. Les Tilleuls Apt 3A",
+    "emails": [
+        {
+            "archived": False,
+            "from_name": "Amina Diallo",
+            "from_email": "a.diallo.loc@gmail.com",
+            "subject": "Fuite plafond salle de bain - Rés. Les Tilleuls Apt 3A",
+            "body": "bonjour\n\nj'ai une grosse tache d'eau au plafond de la salle de bain, ça grossit depuis hier et maintenant ça goutte. je pense que ça vient de l'appart du dessus.\n\nc'est urgent svp\n\namina diallo\napt 3A rés les tilleuls\n\n---\n📎 Pièce jointe : photo_plafond_sdb.jpg (1.4 Mo)",
+            "is_reply": False,
+        },
+    ],
+})
+
+# Thread B : Le plombier répond sur un thread séparé pour intervenir
+FR_STORYLINES.append({
+    "id": "recent_fuite_plafond_diallo_plombier",
+    "thread_subject": "Recherche fuite Tilleuls - Apt 4A / 3A",
+    "emails": [
         {
             "archived": False,
             "from_name": "Duplex Plomberie",
             "from_email": "contact@duplex-plomberie.fr",
-            "subject": "Re: Fuite robinet cuisine - 23 rue Voltaire Apt 2C",
-            "body": "Bonjour M. Morel,\n\nSuite à votre appel, on peut passer demain matin entre 9h et 10h pour le robinet au 23 rue Voltaire.\n\nMerci de confirmer que le locataire sera présent.\n\nCordialement,\nDuplex Plomberie",
-            "is_reply": True,
+            "subject": "Recherche fuite Tilleuls - Apt 4A / 3A",
+            "body": "Bonjour M. Morel,\n\nSuite à votre demande pour la recherche de fuite à la Résidence Les Tilleuls (infiltration depuis le 4A vers le 3A), nous pouvons intervenir demain matin à 9h.\n\nIl faudra accéder aux deux appartements (3A et 4A). Merci de prévenir les locataires.\n\nDevis estimatif en PJ.\n\nCordialement,\nDuplex Plomberie\n\n---\n📎 Pièce jointe : devis_recherche_fuite_tilleuls.pdf (67 Ko)",
+            "is_reply": False,
         },
     ],
 })
 
-# Thread récent 2 : Proprio qui relance (2 msgs)
+# === PAIRE 3 : Volet roulant cassé — 5 impasse des Acacias Apt 3B ===
+# Thread A : Le locataire signale le volet (thread 3 msgs)
 FR_STORYLINES.append({
-    "id": "recent_relance_proprio_blanchard",
-    "thread_subject": "Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
+    "id": "recent_volet_vasseur_locataire",
+    "thread_subject": "Volet roulant bloqué chambre - 5 impasse Acacias Apt 2A",
     "emails": [
         {
             "archived": False,
-            "from_name": "SCI Clos Fleuri Invest",
-            "from_email": "gestion@closfleuri-invest.fr",
-            "subject": "Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
-            "body": "Mme Marchand,\n\nNous n'avons eu aucun retour sur l'avancement des travaux de réfection de la toiture votés en AG. Le couvreur devait commencer en février.\n\nMerci de nous faire un point.\n\nCordialement,\nSCI Clos Fleuri Invest",
+            "from_name": "Claire Vasseur",
+            "from_email": "c.vasseur.loc@gmail.com",
+            "subject": "Volet roulant bloqué chambre - 5 impasse Acacias Apt 2A",
+            "body": "Bonjour,\n\nLe volet roulant de la chambre est complètement bloqué en position fermée depuis ce matin. La sangle ne remonte plus du tout, on est dans le noir.\n\nC'est la 2ème fois en 3 mois, la dernière fois c'est la sangle qui avait cassé. Ma fille dort dans cette chambre et elle a peur dans le noir total...\n\nMerci d'envoyer quelqu'un rapidement.\n\nClaire Vasseur\nApt 2A",
             "is_reply": False,
-        },
-        {
-            "archived": False,
-            "from_name": "Cabinet Gérard & Associés",
-            "from_email": "syndic@gerard-associes.fr",
-            "subject": "Re: Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
-            "body": "Bonjour Mme Marchand,\n\nLe couvreur (Ets Laroche) nous a informés d'un retard de livraison des tuiles. Report prévu à mi-mars. Il y a des infiltrations au dernier étage, ça devient prioritaire.\n\nJe vous transmets le nouveau planning dès réception.\n\nCordialement,\nLe Syndic",
-            "is_reply": True,
         },
     ],
 })
 
-# Thread récent 3 : Thread interne avec multi-PJ (2 msgs, 2+ PJ par msg)
+# Thread B : Le menuisier répond (thread séparé, contacté par gestionnaire)
 FR_STORYLINES.append({
-    "id": "recent_edl_sortie_rodriguez",
+    "id": "recent_volet_vasseur_menuisier",
+    "thread_subject": "Devis réparation volet roulant - 5 impasse des Acacias Apt 2A",
+    "emails": [
+        {
+            "archived": False,
+            "from_name": "Menuiserie Caron",
+            "from_email": "atelier@menuiserie-caron.fr",
+            "subject": "Devis réparation volet roulant - 5 impasse des Acacias Apt 2A",
+            "body": "Bonjour M. Lefèvre,\n\nSuite à votre appel pour le volet roulant bloqué au 5 impasse des Acacias Apt 2A :\n\nC'est le 2ème blocage en peu de temps, la sangle a re-cassé ce qui veut dire que le mécanisme d'enroulement est probablement HS. Il faudra sans doute remplacer l'ensemble (sangle + enrouleur + treuil).\n\nDevis en PJ. Je peux passer après-demain matin si vous validez.\n\nCordialement,\nMenuiserie Caron\n\n---\n📎 Pièce jointe : devis_volet_acacias_2A.pdf (56 Ko)",
+            "is_reply": False,
+        },
+    ],
+})
+
+# === Thread indépendant : EDL sortie Rodriguez avec multi-PJ ===
+FR_STORYLINES.append({
+    "id": "edl_sortie_rodriguez",
     "thread_subject": "EDL sortie Rodriguez - 5 impasse des Acacias Apt 1C",
     "emails": [
         {
@@ -2160,16 +2215,8 @@ FR_STORYLINES.append({
             "from_name": "Thomas Lefèvre",
             "from_email": "t.lefevre@elron-gestion.fr",
             "subject": "EDL sortie Rodriguez - 5 impasse des Acacias Apt 1C",
-            "body": "Bonjour,\n\nJ'ai fait l'état des lieux de sortie ce matin. Quelques dégradations à noter :\n\n- Plan de travail cuisine : brûlure de cigarette (photo 1)\n- Mur salon : trous non rebouchés x4 (photo 2)\n- Moquette chambre : tache importante (photo 3)\n- Salle de bain : joint silicone noirci (photo 4)\n\nLe reste est correct. Compteur eau relevé à 1247 m³.\n\nPhotos et grille EDL en PJ.\n\nThomas\n\n---\n📎 Pièce jointe : EDL_sortie_Rodriguez_5acacias_1C.pdf (2.1 Mo)\n📎 Pièce jointe : photos_EDL_cuisine_salon.zip (4.8 Mo)\n📎 Pièce jointe : photos_EDL_chambre_sdb.zip (3.2 Mo)",
+            "body": "Bonjour,\n\nJ'ai fait l'état des lieux de sortie ce matin. Quelques dégradations à noter :\n\n- Plan de travail cuisine : brûlure de cigarette\n- Mur salon : trous non rebouchés x4\n- Moquette chambre : tache importante\n- Salle de bain : joint silicone noirci\n\nLe reste est correct. Compteur eau relevé à 1247 m³.\n\nPhotos, grille EDL et comparatif entrée/sortie en PJ. Rodriguez conteste la retenue plan de travail, il dit que c'était déjà comme ça à l'entrée. La photo d'entrée est floue sur cette zone.\n\nThomas\n\n---\n📎 Pièce jointe : EDL_sortie_Rodriguez_5acacias_1C.pdf (2.1 Mo)\n📎 Pièce jointe : photos_EDL_cuisine_salon.jpg (4.8 Mo)\n📎 Pièce jointe : comparatif_EDL_entree_sortie.xlsx (45 Ko)",
             "is_reply": False,
-        },
-        {
-            "archived": False,
-            "from_name": "Sophie Marchand",
-            "from_email": "s.marchand@elron-gestion.fr",
-            "subject": "Re: EDL sortie Rodriguez - 5 impasse des Acacias Apt 1C",
-            "body": "Merci Thomas.\n\nJ'ai comparé avec l'EDL d'entrée. Voici ma proposition de retenues sur le dépôt de garantie (540€) :\n\n- Plan de travail brûlé : 150€\n- Rebouchage trous : 40€\n- Nettoyage moquette : 80€\n- Remplacement joint silicone : 30€\n\nTotal retenues : 300€\nRemboursement : 240€\n\nAlexandre, tu valides ? Je joins l'EDL d'entrée et le comparatif. Rodriguez conteste la retenue plan de travail, il dit que c'était déjà comme ça à l'entrée. La photo d'entrée est floue sur cette zone.\n\nSophie\n\n---\n📎 Pièce jointe : EDL_entree_Rodriguez_2023.pdf (1.8 Mo)\n📎 Pièce jointe : comparatif_EDL_entree_sortie.xlsx (45 Ko)",
-            "is_reply": True,
         },
     ],
 })
@@ -2179,29 +2226,33 @@ FR_STORYLINES.append({
 # RECENT INBOX SOLO — 4 emails solo "reçus aujourd'hui" sans réponse user
 # ---------------------------------------------------------------------------
 FR_RECENT_INBOX_SOLO = [
+    # Solo 1 : Facture Veolia (info, pas de réponse attendue)
     {
-        "from_name": "Isabelle Martin",
-        "from_email": "i.martin.locataire@gmail.com",
-        "subject": "Fuite sous évier salle de bain - 8 av Foch Apt 2A",
-        "body": "Re bonjour,\n\nDécidément c'est pas ma période... Après le dégât des eaux, j'ai maintenant une fuite sous l'évier de la salle de bain. Le siphon a l'air fendu.\n\nC'est pas urgent urgent (je mets une bassine) mais faudrait quand même que quelqu'un passe.\n\nMerci\nI. Martin",
+        "from_name": "Veolia Eau",
+        "from_email": "factures@veolia.fr",
+        "subject": "Facture eau T1 2026 - Résidence Les Tilleuls",
+        "body": "Bonjour,\n\nVotre facture d'eau pour le 1er trimestre 2026 est disponible.\n\nMontant : 1 089,34 €\nÉchéance : 15 avril 2026\nRéf. contrat : VE-93-2025-04521\n\nRetrouvez votre facture dans votre espace client.\n\nCordialement,\nVeolia Eau\n\n---\n📎 Pièce jointe : facture_veolia_T1_2026.pdf (78 Ko)",
     },
+    # Solo 2 : Rappel réunion (info interne)
     {
         "from_name": "Thomas Lefèvre",
         "from_email": "t.lefevre@elron-gestion.fr",
         "subject": "Rappel : réunion équipe lundi 9h",
         "body": "Salut à tous,\n\nJuste un rappel pour la réunion de lundi matin. On se retrouve au bureau à 9h. Ordre du jour envoyé par Sophie vendredi.\n\nBon week-end,\nThomas",
     },
+    # Solo 3 : Proprio relance toiture (à relier au thread avec le syndic Gérard si existant)
     {
-        "from_name": "Amina Diallo",
-        "from_email": "a.diallo.loc@gmail.com",
-        "subject": "VMC très bruyante depuis ce matin",
-        "body": "bonjour\n\nla vmc fait un bruit horrible depuis ce matin, on dirait qu'il y a quelque chose de coincé dedans. c'est vraiment très fort, on s'entend plus parler.\n\npouvez vous envoyer quelqu'un svp ?\n\nmerci\namina diallo\napt 3A rés les tilleuls",
+        "from_name": "SCI Clos Fleuri Invest",
+        "from_email": "gestion@closfleuri-invest.fr",
+        "subject": "Travaux toiture Rés. Le Clos Fleuri - point d'avancement",
+        "body": "Mme Marchand,\n\nNous n'avons eu aucun retour sur l'avancement des travaux de réfection de la toiture votés en AG. Le couvreur devait commencer en février.\n\nMerci de nous faire un point.\n\nCordialement,\nSCI Clos Fleuri Invest",
     },
+    # Solo 4 : Locataire remercie (pas de réponse nécessaire)
     {
-        "from_name": "Veolia Eau",
-        "from_email": "factures@veolia.fr",
-        "subject": "Facture eau T1 2026 - Résidence Les Tilleuls",
-        "body": "Bonjour,\n\nVotre facture d'eau pour le 1er trimestre 2026 est disponible.\n\nMontant : 1 089,34 €\nÉchéance : 15 avril 2026\nRéf. contrat : VE-93-2025-04521\n\nRetrouvez votre facture dans votre espace client.\n\nCordialement,\nVeolia Eau\n\n---\n📎 Pièce jointe : facture_veolia_T1_2026.pdf (78 Ko)",
+        "from_name": "Patrick Leroy",
+        "from_email": "p.leroy.locataire@gmail.com",
+        "subject": "Merci pour l'ascenseur",
+        "body": "Bonjour M. Morel,\n\nJe voulais juste vous dire merci, l'ascenseur a été réparé ce matin et il marche parfaitement. Quel soulagement après 2 semaines !\n\nBonne journée,\nP. Leroy\n15 rue des Lilas",
     },
 ]
 
